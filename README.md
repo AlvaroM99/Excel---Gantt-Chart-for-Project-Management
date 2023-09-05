@@ -16,7 +16,7 @@ welcome to this tutorial on how to create the ultimate excel gantt chart for pro
 
 </br>
 
-## User guide
+## User Guide
 
 
 
