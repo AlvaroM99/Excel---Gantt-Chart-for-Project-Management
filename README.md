@@ -30,38 +30,9 @@
 
 ## Overview
 
-Welcome to this tutorial on how to create an Excel Gantt chart for project management. A Gantt chart is a popular project planning tool, and with Excel, you can easily create both simple (using a template) and advanced versions. Today, we will build an outstanding Gantt chart template with advanced and interactive features based on the best project management programs Jira & Trello, making it a professional project planning and management tool that every team can use to plan and manage their own projects.
+Welcome to this repository. Its main purpose is to document how to craft an Excel Gantt chart for project management, which is attached [here](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx). A Gantt chart is a popular project planning tool, and with Excel, you can easily create both simple (using a template) and advanced versions. The Gantt chart template implements advanced and interactive features based on the best project management programs Jira & Trello, making it a professional project planning and management tool that every team can use to plan and manage their own projects.
 
-This Excel tutorial  teaches you how to create the ultimate Excel Gantt Chart Template with many advanced and incredibly powerful features making this a professional project planning and management tool. 
-
-This template introduces a novel and intuitive way of creating and managing fully dynamic project schedules in Excel with items depending on each other based on the four common dependency connection types: Finish-to-Start (FS), Start-to-Start (SS), Start-to-Finish (SF), or Finish-to-Finish (FF). Furthermore, the template includes a smart Project Role and Team Management system, a fully automated Colouring Engine with four different color modes, and many more amazing features. 
-
-Bottom Line: This Excel tutorial teaches you how to create a professional Gantt Chart template in Excel for your project planning and management. It is designed using a fundamentally new approach that allows for a tremendous degree of automation, interactivity, and visualization of different project perspectives.
-
-The final template contains a fully implemented Dependency Engine that let’s you connect your items to each other using one of four different dependency connection types (FS, SS, SF, FF) via dropdown selections. That means you are able to do forward and backward scheduling and even combine both approaches in the same schedule. Furthermore, this Gantt Chart enables you to switch between four fully automated Color Modes with one single click and gives you access to a smart Project Role and Team Management System. And these are just one of many features of this amazing Excel Gantt Chart.
-
-A Gantt Chart is arguably the most widely used project planning tool. And Excel allows you to quickly setup a simple Gantt Chart, but you can also build a really outstanding version with many advanced features that make this a professional project planning and management tool.
-
-This video tutorial teaches every single step on how to create such an advanced and professional Gantt Chart in Microsoft Excel. Along the way you will learn a ton of high-level Excel skills such as how to
-
-systematically set up and design an extended professional Excel tool from scratch
-how to create understandable, reusable, and scalable formula constructs based on named calculations (which let you apply complex formula calculations by entering a single name)
-how to set up multi-level dropdown list constructs that with a dynamic list input
-how to set up an efficient set of conditional formatting rules building on top of each other
-how to smartly apply conditional formatting rules to improve the user experience when inserting data
-and much more…
-
-The final Ultimate Excel Gantt Chart has the following main features:
-
-Smart Project Structure with Stages (S), Tasks (T), and Milestones (M)
-Dependency Engine with the 4 Dependency Connection Types Finish-to-Start (FS), Start-to-Start (SS), Start-to-Finish (SF), and Finish-to-Finish (FF)
-Full Role and Team Management System
-Auto-Coloring Engine with 4 Color Modes
-Plan vs. Base Comparison
-Intuitive Progress Tracking and Visualization
-Dynamic and Static Date Highlighting
-
-This is the most advanced and feature-rich Excel Gantt Chart template. It allows you to create a complex project schedule with dynamic task dependencies, automatic coloring, actual vs. base plan comparison, and many more features based on the best project management programs like Jira and Trello.
+This template introduces a novel and intuitive way of creating and managing fully dynamic project schedules in Excel with items depending on each other based on the four common dependency connection types: Finish-to-Start (FS), Start-to-Start (SS), Start-to-Finish (SF), or Finish-to-Finish (FF). Furthermore, the template includes a smart Project Role & Team Management system, a fully automated Colouring Engine with four different color modes, Plan vs. Base comparison, and more amazing features. It is designed using a fundamentally new approach that allows for a tremendous degree of automation, interactivity, and visualization of different project perspectives.
 
 </br>
 
