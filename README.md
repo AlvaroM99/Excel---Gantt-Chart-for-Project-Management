@@ -7,6 +7,8 @@
 ## Index
 
 - [Overview](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/tree/main#overview)
+- [User Guide](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/tree/main#user-guide)
+- [Documentation](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/tree/main#documentation)
 
 
 </br>
