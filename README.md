@@ -40,23 +40,27 @@
 
 ## User Guide
 
-<p align="justify"> Our final Excel template allows you to set up an advanced and workday-focused project schedule consisting of project stages with task and milestone items. Setting up a schedule for these items is as easy as defining the number of required workdays for each item and then either manually entering an independent start or end date or make use of the core feature of this template, the fully implemented dependency engine. </p>
+<p align="justify"> Our final Excel template allows you to set up an advanced and workday-focused project schedule consisting of project stages with task and milestone items. Setting up a schedule for these items is as easy as defining the number of required workdays for each item and then either manually entering an independent start or end date or make use of the core feature of this template, a fully implemented dependency engine. </p>
 
-![UG_P1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/c10dedd9-cef5-478c-8eca-1f8cb80d9831)
+<p align="justify"> The dependency engine allows you to make one item dependent on another by creating a connection through an intuitive ID system. The columns next to the referenced ID instantly display all the fundamental information about the referenced item. There are four possible dependency connection types to choose from, such as a forward scheduling finish-to-start (FS) or start-to-start dependency (SS), or a backward scheduling start-to-finish (SF) or finish-to-finish dependency (FF). </p>
 
-The dependency engine allows you to make one item dependent on another by creating a connection through an intuitive ID system. The columns next to the referenced ID instantly display all the fundamental information about the referenced item. There are four possible dependency connection types to choose from, such as a forward scheduling finish-to-start (FS) or start-to-start dependency (SS), or a backward scheduling start-to-finish (SF) or finish-to-finish dependency (FF). 
+![ethjh](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/11c8b965-bf84-42cb-aef7-5b0f690c2ae3)
 
 Notice how both the stage bar and the project time span instantly adapt to the changes made. The way this dependency engine is built enables you to set up consecutive dependencies with different dependency connection types in seconds. Any new task or milestone item you add below a stage is instantly assigned to that stage via an automated stage ID system.
 
-The same way you can quickly create a new stage with its own items. Notice how the whole area and the item names are automatically formatted and structured based on the selection you make. With this dependency engine, you are not limited to creating dependencies within a stage. You can also make stages dependent on other stages. 
+</br>
 
-For a forward-oriented stage dependency, you only have to make the initial item in your stage dependent on another stage. Then, a set of standardized formulas allows you to make the stage update based on its items, and finally, you can make the other items consecutively dependent on that initial item. Define the number of workdays and make sure that the milestone ends together with the preceding task. 
+The same way you can quickly create a new stage with its own items. Notice how the whole area and the item names are automatically formatted and structured based on the selection you make. With this dependency engine, you are not limited to creating dependencies within a stage. You can also make stages dependent on other stages. For a forward-oriented stage dependency, you only have to make the initial item in your stage dependent on another stage. Then, a set of standardized formulas allows you to make the stage update based on its items, and finally, you can make the other items consecutively dependent on that initial item. Define the number of workdays and make sure that the milestone ends together with the preceding task. 
 
-In addition, you might have noticed that every stage automatically gets colored with one color group per stage and different color shades for the stage, the tasks, and the milestone symbol. This is made possible through an automated coloring engine that dynamically creates and applies color codes in the background. 
+</br>
 
-The team roles color mode allows you to visualize the project based on the respective role that the project team members responsible for an item got assigned. Eventually, in issues color mode, every item that gets marked with an issue symbol is highlighted in a warning red color. 
+In addition, you might have noticed that every stage automatically gets colored with one color group per stage and different color shades for the stage, the tasks, and the milestone symbol. This is made possible through an automated coloring engine that dynamically creates and applies color codes in the background. The team roles color mode allows you to visualize the project based on the respective role that the project team members responsible for an item got assigned. Eventually, in issues color mode, every item that gets marked with an issue symbol is highlighted in a warning red color. 
+
+</br>
 
 Once you have set up your project schedule, you might want to keep track of the adjustments that you make to that schedule over time. You can document the date of the latest update to the actual project plan and then preserve a snapshot of that plan open the base plan section. 
+
+</br>
 
 This template also allows you to keep track of the stage, task, and milestone completion. Once you set show progress to yes, the percentage completed is beautifully visualized as a filled bar for the stages and tasks, and as a finish flag symbol for completed milestones. 
 
