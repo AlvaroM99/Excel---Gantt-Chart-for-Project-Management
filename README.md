@@ -58,17 +58,31 @@
 </br>
 </br>
 
-<p align="justify"> In addition, you might have noticed that every stage automatically gets colored with one color group per stage and different color shades for the stage, the tasks, and the milestone symbol. This is possible through an automated coloring engine that dynamically creates and applies color codes in the background. The team roles color mode allows you to visualize the project based on the respective role that the project team members responsible for an item got assigned. Eventually, in issues color mode, every item that gets marked with an issue symbol is highlighted in a warning red color. </p>
+<p align="justify"> In addition, you might have noticed that every stage automatically gets colored with one color group per stage and different color shades for the stage, the tasks, and the milestone symbol. This is possible through an automated coloring engine that dynamically creates and applies color codes in the background. </p>
+
+![UG_3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/e72a66a5-93b3-4632-9e59-80d66ed36ba8)
+
+<p align="justify"> The team roles color mode allows you to visualize the project based on the respective role that the project team members responsible for an item got assigned. When we open the "Settings" worksheet we get access to an incredibly powerful project role and team management system that allows us to add an unlimited amount of team members and group them into up to eight roles. You only need to add the role name and provide a short code in the "Project Role Types" table. Then you can add new team members and assign any of the roles in the "Project Team" table. The assignment of roles is automatically tracked in the count column of the role type section. Once the roles are defined and the team members added and assigned, jump back to the "Gantt Chart" worksheet and you can assign any of the defined team members to your tasks and milestones. The respective role is then automatically displayed and visualized with its own individual color in the Gantt chart, the coloring isn't linked to the team member but to its role. </p>
+
+![UG_4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/c8f998f8-b40c-46f1-bf95-ff9f9e579103)
+
+<p align="justify"> In the last color mode, the issues color mode, every item that gets marked with an issue symbol is highlighted in a warning red color. Of course, you can always deactivate all the coloring by switching to "Default"; however, the normal coloring in every Gantt chart is the "Project Structure" color mode. </p>
+
+![UG_5](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/e2495135-326c-4feb-b2de-038f96942a6e)
 
 </br>
 </br>
 
-<p align="justify"> Once you have set up your project schedule, you might want to keep track of the adjustments that you make to that schedule over time. You can document the date of the latest update to the actual project plan and then preserve a snapshot of that plan open the base plan section. </p>
+<p align="justify"> Once you have set up your project schedule, you might want to keep track of the adjustments that you make to that schedule over time. You can document the date of the latest update to the actual project plan and then, in order to preserve a snapshot of that base plan, open the base plan section (the collapsed section with dark blue headers). Taking a snapshot is as simple as copying as values the start and end dates of the actual plan section, and then paste it into the base plan section. When time passes by and you make change to the actual plan, you now have the original plan and the actual plan side by side. In addition, you can visualize the plan shifted dates by changing the "Display" mode to "Plan vs Base". </p>
+
+![UG_6](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7b8ff7ea-4f87-4471-bdf1-90bd023f2a71)
 
 </br>
 </br>
 
-<p align="justify"> This template also allows you to keep track of the stage, task, and milestone completion. Once you set show progress to yes, the percentage completed is beautifully visualized as a filled bar for the stages and tasks, and as a finish flag symbol for completed milestones. </p>
+<p align="justify"> This template also allows you to keep track of the stage, task, and milestone completion. Once you set show progress to yes, the percentage completed is beautifully visualized as a filled bar for the stages and tasks, and as a finish flag symbol for completed milestones. Once you set the "Show progress" mode to yes the percentage completed is beautifully visualized as a filled bar for the stages and tasks and as a finish flag symbol for completed milestones. You can even make the completion of milestones conditionally based on the completion of one or multiple tasks so that the milestone is automatically completed not before the linked task has reached the full 100 percent. In addition, a standardized formula allows you to automatically update the stage progress based on its items. Eventually, this completion tracking feature is perfectly complemented by the date highlighting option which allows you to either dynamically highlight today and make overdue items before that line instantly catches your eyes or alternatively you can statically highlight any of the dates that are visible in the timeline. The selectable timeline dates are immediately updated in the drop-down list whenever you scroll the whole Gantt chart area to the right or left which might be especially helpful for projects of longer duration. </p>
+
+![UG_7](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/5211586a-74ac-43ba-be0b-0d4680095695)
 
 </br>
 </br>
