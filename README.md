@@ -53,6 +53,8 @@
 
 <p align="justify"> In the same way, you can quickly create a new stage with its own items. Notice how the whole area and the item names are automatically formatted and structured based on the selection you make. With this dependency engine, you are not limited to creating dependencies within a stage. You can also make stages dependent on other stages. For a forward-oriented stage dependency, you only have to make the initial item in your stage dependent on another stage. Then, a set of standardized formulas allows you to make the stage update based on its items, and finally, you can make the other items consecutively dependent on that initial item. Define the number of workdays and make sure that the milestone ends together with the preceding task. </p>
 
+![UG_2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/365375e5-8c29-4a1e-96cd-70f1e55b69e3)
+
 </br>
 </br>
 
