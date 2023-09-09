@@ -30,15 +30,19 @@
 
 ## Overview
 
-<p align="justify"> Welcome to this repository. Its main purpose is to document how to craft an Excel Gantt chart for project management, which is attached [here](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx). A Gantt chart is a popular project planning tool, and with Excel, you can easily create both simple (using a template) and advanced versions. The Gantt chart template implements advanced and interactive features based on the best project management programs Jira & Trello, making it a professional project planning and management tool that every team can use to plan and manage their own projects. </p>
+<p align="justify"> Thank you for visiting this repository. The primary aim of this resource is to provide guidance on creating an Excel Gantt chart for project management. The attached chart is a useful tool for planning and organizing tasks in a project. With Excel, you can create both basic and complex versions of the Gantt chart. Our template incorporates advanced and interactive features inspired by the top project management software, Jira and Trello. It is a professional tool that any team can use to effectively plan and manage their own projects. </p>
 
 <p align="justify"> This template introduces a novel and intuitive way of creating and managing fully dynamic project schedules in Excel with items depending on each other based on the four common dependency connection types: Finish-to-Start (FS), Start-to-Start (SS), Start-to-Finish (SF), or Finish-to-Finish (FF). Furthermore, the template includes a smart Project Role & Team Management system, a fully automated Colouring Engine with four different color modes, Plan vs. Base comparison, and more amazing features. It is designed using a fundamentally new approach that allows for a tremendous degree of automation, interactivity, and visualization of different project perspectives. </p>
+
+[Link to Excel Sheets](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx)
 
 </br>
 
 ## User Guide
 
-Our final Excel template allows you to set up an advanced and workday-focused project schedule consisting of project stages with task and milestone items. Setting up a schedule for these items is as easy as defining the number of required workdays and then either manually entering an independent start or end date or making use of the core feature of this template, the fully implemented dependency engine. 
+<p align="justify"> Our final Excel template allows you to set up an advanced and workday-focused project schedule consisting of project stages with task and milestone items. Setting up a schedule for these items is as easy as defining the number of required workdays for each item and then either manually entering an independent start or end date or make use of the core feature of this template, the fully implemented dependency engine. </p>
+
+![UG_P1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/c10dedd9-cef5-478c-8eca-1f8cb80d9831)
 
 The dependency engine allows you to make one item dependent on another by creating a connection through an intuitive ID system. The columns next to the referenced ID instantly display all the fundamental information about the referenced item. There are four possible dependency connection types to choose from, such as a forward scheduling finish-to-start (FS) or start-to-start dependency (SS), or a backward scheduling start-to-finish (SF) or finish-to-finish dependency (FF). 
 
