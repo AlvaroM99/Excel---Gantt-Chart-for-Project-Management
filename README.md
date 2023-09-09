@@ -87,6 +87,7 @@
 </br>
 </br>
 
+<!--
 ## Documentation
 
 ### 1. Initial design setup (Gantt & Settings Worksheets)
@@ -445,3 +446,4 @@ If you want to download this ultimate Excel Gantt chart template, it is availabl
 ```
 
 ## Conclusions
+-->
