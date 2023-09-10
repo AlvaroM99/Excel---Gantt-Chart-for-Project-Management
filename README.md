@@ -4,9 +4,6 @@
 
 ![yhtyhj](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/05f08dbb-a8a9-4957-9eff-1acb47086607)
 
-</br>
-</br>
-
 ## Index
 
 - [Overview](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/tree/main#overview)
@@ -31,7 +28,6 @@
 
 </br>
 </br>
-</br>
 
 ## Overview
 
@@ -41,7 +37,6 @@
 
 [Link to Excel Sheets](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx)
 
-</br>
 </br>
 </br>
 
