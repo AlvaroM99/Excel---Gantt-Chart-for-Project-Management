@@ -35,6 +35,8 @@
 
 <p align="justify"> This template introduces a novel and intuitive way of creating and managing fully dynamic project schedules in Excel with items depending on each other based on the four common dependency connection types: Finish-to-Start (FS), Start-to-Start (SS), Start-to-Finish (SF), or Finish-to-Finish (FF). Furthermore, the template includes a smart Project Role & Team Management system, a fully automated Colouring Engine with four different color modes, Plan vs. Base comparison, and more amazing features. It is designed using a fundamentally new approach that allows for a tremendous degree of automation, interactivity, and visualization of different project perspectives. </p>
 
+Please be aware that this repository's visual explanations are presented through gifs. In case you encounter issues with the size, simply click on the gif and a new tab will open, allowing you to increase its size by using Ctrl + Scroll wheel mouse up.
+
 [Link to Excel Sheets](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx)
 
 </br>
@@ -150,7 +152,21 @@ just like the project manager we also want to display the project time span whic
 
 <p align="justify"> We are going to add a settings button on the top-right corner of our window to take us directly to the Settings worksheet. To create the button, we will merge four cells and add a white border, label it as "Settings," and align the text to the center and middle. We will then right-click on the button and select "Link" to create an internal link within the workbook. We will choose the "Settings" worksheet after selecting "Place in this document" and then we will select the target cell where we plan to place the button that will take us back to the Gantt chart. We can also define a screen tip, which is the text that appears when hovering over the button. To make the merged cell area clickable, we will activate the "Wrap Text" option. Clicking on the settings button will redirect us to cell X2 on the Settings worksheet. We will also create a similar button to take us back to the Gantt worksheet. </p>
 
-so we add the same white borders call it gantt add a link to the gantt worksheet cell bl2 then add a screen tip and apply the required formatting and now this works like a charm we're just going to increase the size a little bit and there we go the initial input section that we're going to create in this settings worksheet will be for some basic project details we add some grey borders around that section and adjust the column size so that we have two small columns on each side acting as padding and two large columns for creating some input fields let's also hide the gridlines on the whole worksheet for a cleaner look and then create multiple input fields for the project title the project manager and potentially some additional information like for example project priority we select all of these labels make them bold decrease the font size and also add some indent and a light gray border and then these cells are the actual input fields which we highlight by adding a light green fill and a similar font size and indent formatting let's enter some example values here the first two are simple text fields and the project priority field is a good opportunity to quickly demonstrate how to set up a drop down list as one form of data validation for a controlled list of input values beautiful for now we will reference the project title and project manager directly in the gantt worksheet so let's replace this title with the input value from the settings worksheet and then let's jump over there add a green label and an absolute cell reference to the project manager input field 
+![Doc1 7](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/c1971df4-f2b4-4b7b-b947-605fead64097)
+
+</br>
+</br>
+</br>
+
+<p align="justify"> The initial input section that we're going to create in this Settings worksheet will be for some basic project details. We add some grey borders around that section and adjust the column size so that we have two small columns on each side acting as padding and two large columns for creating some input fields. Let's also hide the gridlines on the whole worksheet for a cleaner look and then create three input fields: "Project title", "Project manager" and "Project priority". We select all these newly created labels, make them bold, decrease the font size and also add some indent and a light gray border. Then the cell next to each label are the actual input fields which we highlight by adding a light green fill and a similar font size and indent formatting. </p>
+
+![Doc1 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/6aee3fbe-d4c6-4a8c-aa00-9fd408fe5eca)
+
+<p align="justify"> Let's enter some example values, the first two are simple text fields, but the project priority field is a good opportunity to quickly demonstrate how to set up a drop-down list. While having selected the desired cell, go to the "Data" tab, "Data tools" section and click on "Data validation". A window will open, we select "List" in the "Allow" field and then type the values to be selected in the "Source" field. In this case, the values will be: "High, Medium, Low". </p>
+
+![Doc1 9](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/76cc0c3f-c88f-4211-b557-0f968a373d67)
+
+for a controlled list of input values beautiful for now we will reference the project title and project manager directly in the gantt worksheet so let's replace this title with the input value from the settings worksheet and then let's jump over there add a green label and an absolute cell reference to the project manager input field 
 
 </br>
 </br>
