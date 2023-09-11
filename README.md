@@ -54,13 +54,11 @@ Please be aware that this repository's visual explanations are presented through
 
 </br>
 </br>
-</br>
 
 <p align="justify"> In the same way, you can quickly create a new stage with its own items. Notice how the whole area and the item names are automatically formatted and structured based on the selection you make. With this dependency engine, you are not limited to creating dependencies within a stage. You can also make stages dependent on other stages. For a forward-oriented stage dependency, you only have to make the initial item in your stage dependent on another stage. Then, a set of standardized formulas allows you to make the stage update based on its items, and finally, you can make the other items consecutively dependent on that initial item. Define the number of workdays and make sure that the milestone ends together with the preceding task. </p>
 
 ![UG_2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/365375e5-8c29-4a1e-96cd-70f1e55b69e3)
 
-</br>
 </br>
 </br>
 
@@ -78,13 +76,11 @@ Please be aware that this repository's visual explanations are presented through
 
 </br>
 </br>
-</br>
 
 <p align="justify"> Once you have set up your project schedule, you might want to keep track of the adjustments that you make to that schedule over time. You can document the date of the latest update to the actual project plan and then, in order to preserve a snapshot of that base plan, open the base plan section (the collapsed section with dark blue headers). Taking a snapshot is as simple as copying as values the start and end dates of the actual plan section, and then paste it into the base plan section. When time passes by and you make change to the actual plan, you now have the original plan and the actual plan side by side. In addition, you can visualize the plan shifted dates by changing the "Display" mode to "Plan vs Base". </p>
 
 ![UG_6](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7b8ff7ea-4f87-4471-bdf1-90bd023f2a71)
 
-</br>
 </br>
 </br>
 
@@ -94,7 +90,7 @@ Please be aware that this repository's visual explanations are presented through
 
 </br>
 </br>
-</br>
+
 
 ## Documentation
 
