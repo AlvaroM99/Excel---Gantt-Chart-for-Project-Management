@@ -193,6 +193,8 @@ Please be aware that this repository's visual explanations are presented through
 
 <p align="justify"> Let's start by focusing on the basic details of our item setup. First, we will make a small separator row between the header and content and set the font size for the input area to 10. One of the most important input columns is the "Type" selection, which determines whether the item is a stage, task, or milestone. To allow the user to select from these options, we will create a drop-down list using the data validation window, select list and manually enter the values "S" for stage, "T" for task, and "M" for milestone. We will drag down the auto-fill handle to make this selection available in each row and set the text alignment to center. Next, we will enter some example items, such as a stage called "Planning" with some task items and a final milestone, and a second stage called "Implementation" with a similar structure. </p>
 
+![Doc2 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/d02420cc-db3f-435f-97af-7b1690bee971)
+
 </br>
 </br>
 
