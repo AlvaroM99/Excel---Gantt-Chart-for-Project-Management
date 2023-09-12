@@ -191,31 +191,33 @@ Please be aware that this repository's visual explanations are presented through
 
 #### 2.1. Visualizing the hierarchical structure of our items
 
-Let's start by focusing on the basic details of our item setup. First, we will make a small separator row between the header and content and set the font size for the input area to 10. One of the most important input columns is the "Type" selection, which determines whether the item is a stage, task, or milestone. To allow the user to select from these options, we will create a drop-down list using the data validation window, select list and manually enter the values "S" for stage, "T" for task, and "M" for milestone. We will drag down the auto-fill handle to make this selection available in each row and set the text alignment to center. Next, we will enter some example items, such as a stage called "Planning" with some task items and a final milestone, and a second stage called "Implementation" with a similar structure. 
+<p align="justify"> Let's start by focusing on the basic details of our item setup. First, we will make a small separator row between the header and content and set the font size for the input area to 10. One of the most important input columns is the "Type" selection, which determines whether the item is a stage, task, or milestone. To allow the user to select from these options, we will create a drop-down list using the data validation window, select list and manually enter the values "S" for stage, "T" for task, and "M" for milestone. We will drag down the auto-fill handle to make this selection available in each row and set the text alignment to center. Next, we will enter some example items, such as a stage called "Planning" with some task items and a final milestone, and a second stage called "Implementation" with a similar structure. </p>
 
 </br>
 </br>
 
-We will create a dynamic name reference called "type" to reference the values in the type column for future calculations. We will set the scope to this worksheet only and remove the dollar sign in front of the row number to make the row dynamically changeable. This will make it easier to build and understand any formula that uses this value. To visually structure the Gantt worksheet, we will create a conditional formatting rule in the "Description" column that highlights every "Stage" row by setting the font style to bold and adding a mid-gray border at the top and bottom. To do so, in the input field of the new rule (select "Use formula" option) you must type in [ type = "S" ]. 
+<p align="justify"> We will create a dynamic name reference called "type" to reference the values in the type column for future calculations. We will set the scope to this worksheet only and remove the dollar sign in front of the row number to make the row dynamically changeable. This will make it easier to build and understand any formula that uses this value. To visually structure the Gantt worksheet, we will create a conditional formatting rule in the "Description" column that highlights every "Stage" row by setting the font style to bold and adding a mid-gray border at the top and bottom. To do so, in the input field of the new rule (select "Use formula" option) you must type in [ type = "S" ]. </p>
 
-We will also automatically indent the names of the tasks and milestones in the "Description" column to emphasize they are sub-items of the stage. For this, we will create an additional conditional formatting rule and use the custom category to add space characters for indentation. The rule will apply to the cells in which the "type" name that we defined earlier is either a task "T" or a milestone "M" [ OR(type="T", type="M") ]. To create the indented format head to the number tab, select custom and, here comes a cool trick; you can represent an indent value (a space) using the "@" symbol and add the desired number of spaces for indentation ["   @"]. Now we have a clear visualization of the hierarchical structure of our items
+<p align="justify"> We will also automatically indent the names of the tasks and milestones in the "Description" column to emphasize they are sub-items of the stage. For this, we will create an additional conditional formatting rule and use the custom category to add space characters for indentation. The rule will apply to the cells in which the "type" name that we defined earlier is either a task "T" or a milestone "M" [ OR(type="T", type="M") ]. To create the indented format head to the number tab, select custom and, here comes a cool trick; you can represent an indent value (a space) using the "@" symbol and add the desired number of spaces for indentation ["   @"]. Now we have a clear visualization of the hierarchical structure of our items. </p>
 
 </br>
 </br>
 
 #### 2.2. "Color Indicator" column
 
-To differentiate between stages and their sub-items, we will set up a default color indicator by adding two conditional formatting rules to the shrinked color indicator column right next to the "Description" column. One will fill a darker gray when the type equals "S," and the other will fill a lighter gray when the type is "T" or "M" (use the same formulated conditions as before). For an even cleaner formatting of this column let's remove the border formatting, so there are no grey lines clustering the column in its individual rows.
+<p align="justify"> To differentiate between stages and their sub-items, we will set up a default color indicator by adding two conditional formatting rules to the shrinked color indicator column right next to the "Description" column. One will fill a darker gray when the type equals "S," and the other will fill a lighter gray when the type is "T" or "M" (use the same formulated conditions as before). For an even cleaner formatting of this column let's remove the border formatting, so there are no grey lines clustering the column in its individual rows. </p>
 
 </br>
 </br>
 
 #### 2.2. "Issues" column
 
-In the last part of the basic item details setup, we will add a column that enables users to highlight issues. To do this, we'll make a simple drop-down list with a single symbol, aligned to the center. This ensures that users don't need to type anything manually. When there's an issue with an item, users can easily select the symbol, and when the issue is resolved, they can remove it. 
+<p align="justify"> In the last part of the basic item details setup, we will add a column that enables users to highlight issues. To do this, we'll make a simple drop-down list with a single symbol, aligned to the center. This ensures that users don't need to type anything manually. When there's an issue with an item, users can easily select the symbol, and when the issue is resolved, they can remove it. </p>
+
+</br>
+</br>
 
 <!--
-</br>
 
 ### 3. Role & Team Management system
 
