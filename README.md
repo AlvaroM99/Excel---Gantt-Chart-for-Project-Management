@@ -100,7 +100,7 @@ Please be aware that this repository's visual explanations are presented through
 
 ## 1. Initial design setup (Gantt & Settings Worksheets)
 
-### 1.1. General design
+## 1.1. General design
 
 <p align="justify"> To begin with, let's set up the general design for the Gantt and Settings worksheets. Beginning with the Gantt worksheet, we will start by setting up the header rows for our input and Gantt chart area. We will select these two rows and decrease the general text style to size 10, make it bold, and align it to the center and middle. After that, we will select the range B13 to W13 and give the cells a green fill, as this is the row where we will put all the single-column headers. In the row above, we will create section names starting with the first three columns as the section for ids and then the next six columns for the item details. Column K to T is where the actual planning will happen, while the two following columns will be used to preserve a snapshot of the actual plan at a certain point in time. We will call this base plan. </p>
 
@@ -230,7 +230,7 @@ Please be aware that this repository's visual explanations are presented through
 
 
 
-### 3. Role & Team Management system 
+## 3. Role & Team Management system 
 
 ### 3.1. Creating the "Project Role Types" table
 
