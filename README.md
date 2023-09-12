@@ -210,12 +210,16 @@ Please be aware that this repository's visual explanations are presented through
 
 <p align="justify"> To differentiate between stages and their sub-items, we will set up a default color indicator by adding two conditional formatting rules to the shrinked color indicator column right next to the "Description" column. One will fill a darker gray when the type equals "S," and the other will fill a lighter gray when the type is "T" or "M" (use the same formulated conditions as before). For an even cleaner formatting of this column let's remove the border formatting, so there are no grey lines clustering the column in its individual rows. </p>
 
+![Doc2 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/0497e392-6d89-4aa4-80ea-578aef388a2d)
+
 </br>
 </br>
 
 ### 2.3. "Issues" column
 
 <p align="justify"> In the last part of the basic item details setup, we will add a column that enables users to highlight issues. To do this, we'll make a simple drop-down list with a single symbol, aligned to the center. This ensures that users don't need to type anything manually. When there's an issue with an item, users can easily select the symbol, and when the issue is resolved, they can remove it. </p>
+
+![Doc2 5](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/96118d8e-1db7-472d-99f4-79e7bcbbef92)
 
 </br>
 </br>
