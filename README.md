@@ -195,15 +195,13 @@ Please be aware that this repository's visual explanations are presented through
 
 ![Doc2 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/d02420cc-db3f-435f-97af-7b1690bee971)
 
-</br>
-</br>
-
 <p align="justify"> We will create a dynamic name reference called "type" to reference the values in the type column for future calculations. We will set the scope to this worksheet only and remove the dollar sign in front of the row number to make the row dynamically changeable. This will make it easier to build and understand any formula that uses this value. To visually structure the Gantt worksheet, we will create a conditional formatting rule in the "Description" column that highlights every "Stage" row by setting the font style to bold and adding a mid-gray border at the top and bottom. To do so, in the input field of the new rule (select "Use formula" option) you must type in [ type = "S" ]. </p>
 
 ![Doc2 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7f4ef159-7ebb-43db-b40c-91ff62ff5944)
 
 <p align="justify"> We will also automatically indent the names of the tasks and milestones in the "Description" column to emphasize they are sub-items of the stage. For this, we will create an additional conditional formatting rule and use the custom category to add space characters for indentation. The rule will apply to the cells in which the "type" name that we defined earlier is either a task "T" or a milestone "M" [ OR(type="T", type="M") ]. To create the indented format head to the number tab, select custom and, here comes a cool trick; you can represent an indent value (a space) using the "@" symbol and add the desired number of spaces for indentation ["   @"]. Now we have a clear visualization of the hierarchical structure of our items. </p>
 
+![Doc2 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/26fc09ce-cfb3-4863-9ca5-3923bafde23d)
 
 </br>
 </br>
