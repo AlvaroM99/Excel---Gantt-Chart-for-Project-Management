@@ -94,9 +94,9 @@ Please be aware that this repository's visual explanations are presented through
 
 ## Documentation
 
-### 1. Initial design setup (Gantt & Settings Worksheets)
+## 1. Initial design setup (Gantt & Settings Worksheets)
 
-#### 1.1. General design
+### 1.1. General design
 
 <p align="justify"> To begin with, let's set up the general design for the Gantt and Settings worksheets. Beginning with the Gantt worksheet, we will start by setting up the header rows for our input and Gantt chart area. We will select these two rows and decrease the general text style to size 10, make it bold, and align it to the center and middle. After that, we will select the range B13 to W13 and give the cells a green fill, as this is the row where we will put all the single-column headers. In the row above, we will create section names starting with the first three columns as the section for ids and then the next six columns for the item details. Column K to T is where the actual planning will happen, while the two following columns will be used to preserve a snapshot of the actual plan at a certain point in time. We will call this base plan. </p>
 
@@ -117,7 +117,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-#### 1.2. General timeline design
+### 1.2. General timeline design
 
 <p align="justify"> For the timeline, we will fill the cell right next to the percentage column header with a dark blue. Right above that, we are going to select two cells, set the fill to a light blue, make the column really tight, and then merge these three cells together. For the merged cell we will set rotate text up, text alignment to the top, and the font size to 8. Then we can just select the whole column and transfer this specific formatting to as many subsequent columns as we wish using the autofill function. </p>
 
@@ -126,7 +126,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-#### 1.3. Enhancing the overall design aesthetics
+### 1.3. Enhancing the overall design aesthetics
 
 <p align="justify"> That's already it for the basic design of the headers and timeline. For a cleaner design, let's hide the default grid lines and add a way better-looking custom formatting instead. Initially, we want to visually separate the main sections, so let's hold the Ctrl key and select the respective sections, including the header rows and the number of content rows below. With all these selected, we go to the Home tab, open the border menu, and click on more borders. This will open the Format Cells window in which we can now select a border color like this mid-light gray and then specify that we want to add a left and right border. The overall spacing in this sheet is aimed to perfectly fit into the open window, with the actual planning section fully expanded and the base plan section collapsed, so do that and then let's select the whole content area and add some horizontal row-wise borders with an even lighter gray. </p>
 
@@ -135,7 +135,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-#### 1.4. First configuration of the "Settings" worksheet
+### 1.4. First configuration of the "Settings" worksheet
 
 <p align="justify"> We are going to add a settings button on the top-right corner of our window to take us directly to the Settings worksheet. To create the button, we will merge four cells and add a white border, label it as "Settings," and align the text to the center and middle. We will then right-click on the button and select "Link" to create an internal link within the workbook. We will choose the "Settings" worksheet after selecting "Place in this document" and then we will select the target cell where we plan to place the button that will take us back to the Gantt chart. We can also define a screen tip, which is the text that appears when hovering over the button. To make the merged cell area clickable, we will activate the "Wrap Text" option. Clicking on the settings button will redirect us to cell X2 on the Settings worksheet. We will also create a similar button to take us back to the Gantt worksheet. </p>
 
@@ -156,7 +156,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-#### 1.5. First configuration of the timeline
+### 1.5. First configuration of the timeline
 
 <p align="justify"> As the final step of the timeline setup, we also want to display the "Project timespan", which includes the project start and end dates, as well as the "Project duration" using labels in the main header of the worksheet. For now, we are only going to enter an example date value for the project start date and some placeholder values for the project end date and duration. Nevertheless, later in this tutorial, we're going to transform this into a dynamically computed timespan. For the time being, we only need the project start date as we need it to set up the timeline values, which means we will reference the start date as the initial date in the timeline. Make sure it has a clean date formatting, to do so go to the "Home" tab, "Number" section and open the dropdown list in the top. Here select the last option "More Number Formats..." to customize the date as you wish by selecting the category "Custom", however, the "dd-mmm-aa" customized format works fine. </p>
   
@@ -171,7 +171,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-#### 1.6. Dynamic structuring of the timeline and chart area based on weeks
+### 1.6. Dynamic structuring of the timeline and chart area based on weeks
 
 <p align="justify"> As the final step of this initial setup, we want to dynamically structure the timeline and chart area based on weeks so we'll need to create a visual separation between the weeks that is correctly displayed even if the timeline is shifted to the left or right. To do so, let's first create a dynamic name reference that dynamically references the date cells in the timeline; we select the initial timeline date cell, go to the "Formulas" tab and click on define name. The name of this reference will be simply "date", we set the scope to this worksheet only (so this name reference will only be valid in the scanned worksheet) and then we click into the reference down below which currently is an absolute cell reference with a dollar sign in front of both the column and the row. By removing the dollar sign in front of the column letter this name will now dynamically reference the date cell in whatever column it is called from, while row 10 is fixed. In a similar manner, we can also create a name that always references the next date in the timeline called "next_date". The reference you define in the formula bar below will always be relative to the cell that you had selected at the moment you opened the define name window; that means if we now, not only remove the dollar sign in front of the column letter but also change the column letter from X to Y (the next one) this name now always references the date cell in the next column, while the row 10 is still fixed. </p>
 
@@ -187,9 +187,9 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 
 
-### 2. Basic dynamic structuring of the "Item Details" section 
+## 2. Basic dynamic structuring of the "Item Details" section 
 
-#### 2.1. Visualizing the hierarchical structure of our items
+### 2.1. Visualizing the hierarchical structure of our items
 
 <p align="justify"> Let's start by focusing on the basic details of our item setup. First, we will make a small separator row between the header and content and set the font size for the input area to 10. One of the most important input columns is the "Type" selection, which determines whether the item is a stage, task, or milestone. To allow the user to select from these options, we will create a drop-down list using the data validation window, select list and manually enter the values "S" for stage, "T" for task, and "M" for milestone. We will drag down the auto-fill handle to make this selection available in each row and set the text alignment to center. Next, we will enter some example items, such as a stage called "Planning" with some task items and a final milestone, and a second stage called "Implementation" with a similar structure. </p>
 
@@ -203,14 +203,14 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-#### 2.2. "Color Indicator" column
+### 2.2. "Color Indicator" column
 
 <p align="justify"> To differentiate between stages and their sub-items, we will set up a default color indicator by adding two conditional formatting rules to the shrinked color indicator column right next to the "Description" column. One will fill a darker gray when the type equals "S," and the other will fill a lighter gray when the type is "T" or "M" (use the same formulated conditions as before). For an even cleaner formatting of this column let's remove the border formatting, so there are no grey lines clustering the column in its individual rows. </p>
 
 </br>
 </br>
 
-#### 2.2. "Issues" column
+### 2.3. "Issues" column
 
 <p align="justify"> In the last part of the basic item details setup, we will add a column that enables users to highlight issues. To do this, we'll make a simple drop-down list with a single symbol, aligned to the center. This ensures that users don't need to type anything manually. When there's an issue with an item, users can easily select the symbol, and when the issue is resolved, they can remove it. </p>
 
