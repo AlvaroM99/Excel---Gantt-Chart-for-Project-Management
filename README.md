@@ -37,7 +37,7 @@
 
 Please be aware that this repository's visual explanations are presented through gifs. In case you encounter issues with the size, simply click on the gif and a new tab will open, allowing you to increase its size by using Ctrl + Scroll wheel mouse up.
 
-[Link to Excel Sheets](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx)
+[Link to Excel Workbook](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/blob/main/Gantt%20Chart%20for%20Project%20Management.xlsx)
 
 - Unicode icons: ⚠ - ◆ - ⚑ - ↖ - ↙
 - Color palette of the workbook:  F0E936 - 40D492 - F9B710 - FE1684 - 9237BC - 4633F2 - 3285F3 - 1DD7F3
