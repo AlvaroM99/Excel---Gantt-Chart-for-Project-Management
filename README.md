@@ -24,7 +24,7 @@
   - [Scroll Buttons](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#11-scroll-buttons)
   - [Manage & Filter Items (Via Quick Access Toolbar)](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#12-manage--filter-items-via-quick-access-toolbar)
 
-
+-
 </br>
 </br>
 
@@ -287,7 +287,7 @@ Please be aware that this repository's visual explanations are presented through
 
 ## 4. Manual Planning with independent Start or End Dates
 
-### 4.1. Core creation of the manual plannig mode
+### 4.1. Manual plannig mode given an Independent Start Date
 
 <p align="justify"> Now let's move on to implementing the basic manual planning with independent start or end dates. The most crucial columns for the actual plan will be the two calculated columns for the start and end dates, as all the date-related visualization in the chart area will be based on these two columns. The reason why the start and end date need to always be calculated is that we're going to have different input options. As previously mentioned, the calculation of the start and end date will always be based on two inputs: one input is the number of required workdays, and the second input is either an independent start date, an independent end date, or a dynamic start or end date that is dependent on another item. Of these two calculated start and end date columns, one will always be defined directly from the date section, and then the other one will be calculated based on that and the defined number of workdays. Before we start setting this up, let's make sure that all the date columns, including the base plan columns, have the same clean date format (dd-mmm-aa). </p>
 
@@ -310,9 +310,9 @@ Please be aware that this repository's visual explanations are presented through
 
 <!--
 
-Right below the timeline, we have all the information prepared that we need to decide if an item is within its plan in a given cell. Because we now know what the plan start is, what the plan end is, and what a respective date in the timeline is, these name references work correctly from every cell in this chart area, no matter which one you take. To figure out if a cell should display something or not, all we need to do is check if the date is within the planned time span. So, if the date is greater equal to plan start and smaller equal to plan end, this formula returns either true or false. And for demonstration purposes, let's display that as either a 1 or a 0 by multiplying it with 1. We can use the autofill handle to add this formula to the whole row, and as you see, this displays a 1 in each cell belonging to the defined plan time span. When we add this to all the rows, we can verify it works perfectly for all defined items. 
+Right below the timeline, we have all the information prepared to develop a formula that let us determine whether an item is within its plan in a given cell or not. Because we now know what the plan start is, what the plan end is, and what a respective date in the timeline is. These name references work correctly from every cell in the chart area. To figure out if a cell should display something or not, all we need to do is check if the date is within the planned time span. So, if the "date" is greater equal to "plan_start" and smaller equal to "plan_end", this formula returns either true or false [ AND(date>=plan_start; date<=plan_end) ]. And for demonstration purposes, you can display either a 1 or a 0 by multiplying the formula by 1. When we add this to all rows we can verify it works perfectly for all defined items. 
 
-Amazing! For this formula again, it makes sense to transform it into a named calculation. So let's copy it and create a new name that is called item in plan. Set the scope to this worksheet and paste the formula. It is simple as that. Now we can replace this formula and have one short expression that works in every cell of this Gantt chart area, and that is all we need to implement the default visualization. One big goal of this template is to have the stages, tasks, and milestones all differently visualized. And while the stages and tasks can be perfectly visualized using a cell color fill without any written cell content, we want the milestone to display an actual milestone symbol. For that purpose, I have prepared two Unicode icons, one for an open and one for a completed milestone. And for now, this symbol for the open milestone has to be somehow written into the cell. 
+For this formula again, it makes sense to transform it into a named calculation. So let's copy it and create a new name that will be called "item_in_plan". Set the scope to this worksheet and paste the formula. It is simple as that. Now we can replace this formula and have one short expression that works in every cell of this Gantt chart area, and that is all we need to implement the default visualization. One big goal of this template is to have the stages, tasks, and milestones all differently visualized. And while the stages and tasks can be perfectly visualized using a cell color fill without any written cell content, we want the milestone to display an actual milestone symbol. For that purpose, I have prepared two Unicode icons, one for an open and one for a completed milestone. And for now, this symbol for the open milestone has to be somehow written into the cell. 
 
 So let's copy over this Unicode icon and start building the milestone visualization as an in-cell formula. In the formula, we only have to check two conditions that have to be true. First, the type has to be a milestone, and second, the item has to be in plan in this cell. If that's the case, we just print this milestone symbol. Otherwise, an empty text string. Let's add this formula to the full range. We instantly see the milestone symbol is printed on the correct day. And in addition, we're going to align the cell content to the middle and center and slightly increase the font size. Perfect! 
 
