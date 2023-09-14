@@ -24,7 +24,6 @@
   - [Scroll Buttons](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#11-scroll-buttons)
   - [Manage & Filter Items (Via Quick Access Toolbar)](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#12-manage--filter-items-via-quick-access-toolbar)
 
- - [Conclusions](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#conclusions)
 
 </br>
 </br>
@@ -288,14 +287,23 @@ Please be aware that this repository's visual explanations are presented through
 
 ## 4. Manual Planning with independent Start or End Dates
 
+### 4.1. Core creation of the manual plannig mode
+
 <p align="justify"> Now let's move on to implementing the basic manual planning with independent start or end dates. The most crucial columns for the actual plan will be the two calculated columns for the start and end dates, as all the date-related visualization in the chart area will be based on these two columns. The reason why the start and end date need to always be calculated is that we're going to have different input options. As previously mentioned, the calculation of the start and end date will always be based on two inputs: one input is the number of required workdays, and the second input is either an independent start date, an independent end date, or a dynamic start or end date that is dependent on another item. Of these two calculated start and end date columns, one will always be defined directly from the date section, and then the other one will be calculated based on that and the defined number of workdays. Before we start setting this up, let's make sure that all the date columns, including the base plan columns, have the same clean date format (dd-mmm-aa). </p>
+
+![Doc4 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/a0ad9cb7-5a0d-4810-9b01-e4018ee92583)
 
 <p align="justify"> Let's start by setting up the simplest of all options, which is providing an independent start date and the number of required workdays. In order to make these cell values easy to reference in other formulas, we define dynamic name references for the independent start date (you can call it "ind.start"). Always keep in mind to remove the dollar sign in front of the row number. Then we do the same for the workdays, but this time we not only make it dynamic, but we also want to make sure that this name reference will always have a default value of 1 in case the cell is empty. We can easily do that by returning the maximum of the cell value and 1 [ MAX(Gantt!$R15; 1) ]. This has two big advantages. First of all, it is guaranteed that an item will become instantly visible once either a start or end date is provided, even before the number of workdays is entered. Second, we don't need to actively enter a workday number for milestones. </p>
 
+![Doc4 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/2f0ed4e1-625f-4804-b935-33c29a5f3ba4)
+
 <p align="justify"> As we will need to reference the calculated plan start and plan end for the Gantt chart visualization, let's also add dynamic name references for these. I explicitly call them "plan_start" and "plan_end", as these will be the ones that will always represent the actual plan in one constant place. The formula for the plan start in this scenario is pretty simple. We first check if the independent start date is non-empty [ IF(ind.start<>""; ], and if that is the case, we return the independent start date; Otherwise, an empty string [ IF(ind.start<>""; ind.start; "") ]. So this is the date directly taken from the input section, whereas the plan end date has to be calculated based on the plan start and the workdays. In a similar manner, we also check if ind.start is also non-empty because only then the plan start is also not empty [ IF(ind.start<>""; ]. Then. we're going to make use of the WORKDAY function, put in the "plan_start" as start date and add the "workdays" reference minus one. The reason why we have reduced this number by one is that the planned start date is already one of these 10 workdays, so the plan end date must be one day less [ IF(ind.start<>""; WORKDAY(plan_start; workdays-1); "") ]. The alternative value in case ind.start is empty is again an empty string. </p>
+  
+![Doc4 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7c0f04ef-0ac1-4c23-90b7-d5384e4127ba)
 
 <p align="justify"> Let's do a quick check if the calculation is correct by looking at the timeline. As you see, the 10th to the 21st of May are exactly a 10 workday time span, so it works correctly. When we take a closer look at this formula, there are two crucial things we always have to keep in mind. First, every time we calculate one of these plan dates by adding or subtracting the workdays from the other date, it is crucial that we reference the other calculated plan date and not the input date like ind.start; because otherwise, we will end up creating circular references at some point. The second aspect to consider is, as both these formulas will get a lot more complex over time and also we are going to reuse certain calculations, it is advisable to transform all sub-calculations into what I call named calculations. What that means is that instead of entering these sub-calculations directly into the formula itself, we gonna create names for them in the name manager and only have to reference the name in the bigger formula for the same exact result. That not only makes the bigger formulas easier to read and is reusable, but also allows us to manage and potentially adjust each sub-calculation at one central place in the name manager. </p>
 
+![Doc4 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/3b872fb4-f2ba-4e42-aee6-ae750368dad7)
 
 
 <!--
@@ -554,5 +562,4 @@ Another great idea is to filter by the assigned team role, which allows you to b
 If you want to download this ultimate Excel Gantt chart template, it is available on excelfind.com. The link for that is in the description. I hope you enjoyed this tutorial, and I'd be curious to know what additional features you would love to see in this Gantt chart template. Let me know in the comments. Any constructive feedback and, of course, a thumbs up is appreciated. And that being said, I wish you a beautiful day and see you next time. Cheers!
 ```
 
-## Conclusions
 -->
