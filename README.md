@@ -24,7 +24,7 @@
   - [Scroll Buttons](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#11-scroll-buttons)
   - [Manage & Filter Items (Via Quick Access Toolbar)](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management#12-manage--filter-items-via-quick-access-toolbar)
 
--
+
 </br>
 </br>
 
