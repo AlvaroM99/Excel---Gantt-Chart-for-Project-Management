@@ -333,7 +333,7 @@ Please be aware that this repository's visual explanations are presented through
 
 ### 4.3. Manual planning mode given an Independent End Date
 
-<p align="justify"> Now that we have set up the default visualization, let's take a look at the other manual scheduling option, which is instead of entering an independent start date and doing a forward scheduling, entering an independent end date and doing a backward scheduling. Let's reproduce the same exact time span for this stage by entering the end date that is calculated in the plan and cell at the moment, which is the 21st of May. At the moment, the "plan_start" and "plan_end" formulas are only able to work with the independent start date input. </p>
+<p align="justify"> Now that we have set up the default visualization, let's take a look at the other manual scheduling option, which is instead of entering an independent start date and doing a forward scheduling, entering an independent end date and doing a backward scheduling. Let's reproduce the same exact time span for this stage by entering the end date that is calculated in the plan end cell at the moment, which is the 21st of May. At the moment, the "plan_start" and "plan_end" formulas are only able to work with the independent start date input. </p>
 
 <p align="justify"> First, we're going to create a dynamic name reference for the independent end date ("ind.end"), remove the dollar sign in front of the row number, and then jump straight into "plan_start" and "plan_end" formulas. This time, we start by modifying the "plan_end" formula. At first, instead of returning an empty string if ind.start is empty, we now continue with a second nested IF statement that checks if "ind.end" is non-empty because, if that is the case, we want to directly get the value of "ind.end" and only otherwise we're going to return an empty text string (*). </p>
 
@@ -341,6 +341,7 @@ Please be aware that this repository's visual explanations are presented through
 (*) = IF(ind.start<>""; plan_end_calculation;
                         IF(ind.end<>""; ind.end; ""))
 ```
+![Doc4 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/52065492-395f-4e30-a27e-a0966e3d980d)
 
 <p align="justify"> Let's also update the formula in the other rows of that column and, this time, the "plan_start" has to be calculated backwards based on the "plan_end". First, we check if "ind.end" is non-empty and, if that's the case, we use the WORKDAY function, put in the "plan_end" calculation as the start date of the WORKDAY function and then add the negative number of "workdays" (-1, the idea is again going day by day but backwards); so we multiply the workdays by -1.  Since the "end_date" is already one of these 10 "workdays" we have to add one again to make it only go back 9 workdays, otherwise, if "ind.end" is empty we just return an empty text string (*). We now have successfully reproduced the exact same time span that we had before so, again, let's take that sub calculation and create a new name reference that we call "plan_start_calculation". Update the other rows in the plan start column and test if it recreates these time spans by providing only independent end dates. </p>
 
@@ -348,8 +349,11 @@ Please be aware that this repository's visual explanations are presented through
 (*) = IF(ind.start<>""; plan_end_calculation;
                         IF(ind.end<>""; WORKDAY(plan_end; (-1)*workdays+1) ""))
 ```
+![Doc4 9](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/b48d64f8-8dd4-4e78-b135-a947f0e02809)
 
 <p align="justify"> We have intentionally implemented both the "plan_end" and "plan_start" formulas using a hierarchical logic, which means these formulas are written in a way that the "ind.start" value will always override the "ind.end" value which will be ignored. To make the manual planning mode more intuitive we're going to add a conditional formatting rule to the "ind.end" column that simply checks if "ind.start" is non empty [ ind.start <> "" ], if that's true the "ind.end" value will be inactive and we indicate that by giving it a mid-gray font color. Now we instantly know which one of both independent dates are we currently using. Let's overwrite the stage and task items with the original "ind.start" date, leave the milestone defined via the "ind.end" date and we quickly set up a second stage. The first task using a forward scheduling and the other two tasks being backward scheduled. That way we can perfectly see how the bar now grows backwards as soon as we set the number of workdays to a number that is bigger than 1 same for the next task. 
+  
+![Doc4 10](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/d77a44dc-31fd-42af-870d-87af5a0fb855)
 
 </br>
 </br>
@@ -358,9 +362,25 @@ Please be aware that this repository's visual explanations are presented through
 
 <p align="justify"> It's the perfect time to explain how quickly we can automate stage calculations and visualization based on its items. As I have no intention to override the calculated "plan_start" and "plan_end" formulas. The clean approach here is to work with some simple formulas in the input section; for that, I have prepared two standardized placeholder formulas that are easy to use. All you need to do is copy the "Auto stage Ind.Start" placeholder formula into the "ind.start" cell of a stage, and then replace this placeholder with the planned start range of the items in that stage. In the same manner we can dynamically calculate the number of workdays using the given placeholder formula ("Auto Stage Workdays") which references the plan start and then calculates the net workdays between this plan start and the maximum of the items, within that stage, "plan_end" dates. We are now free to change any of the tasks or milestone schedules and the stage timespan will always be automatically updated. </p>
 
-<p align="justify"> I think the usage of formulas in these input cells somehow makes it necessary to be highlighted. Let's add a new conditional formatting rule to the "int start" column that checks if the cell contains a formula, let's make the cell reference fully relative and the formatting will be a strong blue font color (as always, formatting, is up to you). Let's also include the workdays column into this rule and that makes these formula inputs clearly distinguishable from regular inputs. Once we have build such an auto-stage formula in one stage we can simply copy it over to another stage since the range references are relative. In case you have a different number of items all you need to do is adjust this referenced range with your mouse and you are good to go. </p>
+```
+(*) = MIN(ITEMS_START)
+(**) = NETWORKDAYS(plan_start; MAX(ITEMS_END))
+```
+
+![Doc4 11](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/ed6b123a-49f7-4a47-8e0a-39cd475729c7)
+
+<p align="justify"> I think the usage of formulas in these input cells somehow makes it necessary to be highlighted. Let's add a new conditional formatting rule to the "int start" column that checks if the cell contains a formula, let's make the cell reference fully relative and the formatting will be a strong blue font color (as always, formatting, is up to you). Let's also include the workdays column into this rule and that makes these formula inputs clearly distinguishable from regular inputs. Once we have built such an auto-stage formula in one stage we can simply copy it over to another stage since the range references are relative. In case you have a different number of items all you need to do is adjust this referenced range with your mouse and you are good to go. </p>
+
+![Doc4 12](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/65f3e766-f764-4623-b39e-bd95c9347608)
 
 <p align="justify"> What really amazes me about this general setup is that we can now collapse the date input columns and have the workdays as key information still visible. Whenever we want to adjust the number of required workdays for a task there is no need to manually update the stage workdays as they are updated automatically with this auto-stage workday's calculation. This formula is not simply adding up all the workdays of stage items, but actually computing the maximum time span of all items; by having this function it is fully able to handle whatever items overlap with the time span. For the auto-stage ind start value we can make it even more obvious that this is not a real "ind.start" date by adding an additional rule that only focuses on the "Ind start" column and is also limited to Stage rows. Only when the cell is in a Stage row and it is a formula, instead of displaying the date itself, a really cool trick is to just override it with a text value which will be "Auto". I think this is a beautiful and intuitive setup, a first take on what's about to come.</p>
+
+```
+(**) = NETWORKDAYS(plan_start; MAX(ITEMS_END))
+```
+
+![Doc4 13](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/18577ae7-2b89-40a2-afea-a9c803458a60)
+
 '''
 </br>
 </br>
