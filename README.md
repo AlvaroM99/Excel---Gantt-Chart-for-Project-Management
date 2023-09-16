@@ -391,7 +391,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-### 5.1. Primal creation of the ID's System
+### 5.1. Elementary construction of the ID's System
 
 <p align="justify"> The key idea for making an item dependent on another item is linking it to the other item's id. This obviously requires us to create a reliable id system in advance, and for that, we start by defining a dynamic name reference for the cells in the "id" column within the "ID's" section. We call it "id", set a scope, and as usual, remove the dollar sign in front of the row number. As we don't want to manually enter any ids, we somehow need them to be automatically created and self-sustaining in case we insert or delete a certain row. That means we want to have an id system in which each id dynamically represents the position of its item's row in the whole list of items as a unique number. The straightforward solution of simply entering and autofilling a sequence of numbers directly is not sufficient in that case because as soon as we insert a row and use the fill down option, we get duplicates. Setting the first id to 1 and then for all subsequent ids just referencing the previous id and incrementing it by 1 is also not fully working as the id below the inserted row unfortunately keeps referencing the same id. So we have to create something that is way more robust and self-sustaining. </p>
 
@@ -402,6 +402,7 @@ Please be aware that this repository's visual explanations are presented through
 ```
 (*) = IF(ROW(id)=ROW($C$14)+2; 1; MAX(prev_col_range)+1)
 ```
+![Doc5 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/f44cc1e5-d7c9-4dec-9c26-4fe0dba62185)
 
 </br>
 </br>
@@ -415,13 +416,14 @@ Please be aware that this repository's visual explanations are presented through
 ```
 (*) = IF(d.id<>""; IF(d.id<id;"↖"; IF(d.id>id;"↙";""));"")
 ```
+![Doc5 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/12f1a79a-cff2-4edf-a329-3f22e33d21a3)
 
 <p align="justify"> In the next column we want to automatically display the type and name of the linked item. This is a classic look up problem so we can use the MATCH function to look up the "d.id" value in the "id" column to get the correct row number, and then use the INDEX function to return the respective value from the "Type" and "Description" columns. As we're going to need the row number of the other item at multiple occasions let's just start with the MATCH part and make a named calculation for the lookup value; we pass "d.id" as the desired value and then, for the lookup array, we can pass the whole column B ("Id" column) as an absolute reference with dollar signs. We also add a 0 to have an exact match (*). This returns 16 in this example which indeed is the row number of the linked item, so let's copy that formula and transform it into a named calculation that we call "d.row". For extracting the other item's type we use the INDEX function to take a look at the column E ("Type" column) and return the value from the row calculated in "d.row" (**). We can save this new INDEX calculation as "d.type". Lastly, the linked item's name it's basically the same approach let's call it "d.name", paste the INDEX formula we just used but replace column E ("Type") with column F ("Description")(***). </p>
 
 ```
 (*) "d.row" = MATCH(Gantt!d.id; Gantt!$B:$B; 0)
 (**) "d.type" = INDEX(Gantt!$E:$E; Gantt!d.row)
-(***) "d.name" = INDEX(Gantt!$F:$F;Gantt!d.row)
+(***) "d.name" = INDEX(Gantt!$F:$F; Gantt!d.row)
 ```
 
 <p align="justify"> Now we have all this information about the other item available as named calculations. Let's also decrease the font size a bit and change the font color of all this information to a dark gray to show these are secondary lookup information. We are now prepared to create a concatenated string that contains "d.type" in brackets, followed by "d.name". This string correctly displays the information but once we add this formula to some row that has not a "d.id" reference this will result in an N/A error. In order to catch this and potential other errors, let's wrap this expression in an IFERROR function that displays an empty string in case an error occurs. One additional aspect to consider is that the other item's name could potentially be way longer than the space left in the cell. To avoid this problem adjust this formula; instead of just directly printing the full name we first are going to check if the length of this name exceeds a certain threshold (for example 7 characters) and, in case it exceeds that threshold we're going to apply the left function to extract the first threshold number of characters, so in this case 7 followed by some dots (*). Let's do a final test for the whole "d.item' output by changing the referenced id once again, and the information displayed matches the information for the new dependent item. </p>
@@ -429,6 +431,8 @@ Please be aware that this repository's visual explanations are presented through
 ```
 (*) = IFERROR("("&@d.type&")"&@ IF(LEN(@d.name)>7; LEFT(@d.name;7)&"…"; d.name);"")
 ```
+![Doc5 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/6cc74eea-734d-4e5d-a43a-c9b235e1203a)
+
 </br>
 </br>
 
