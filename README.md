@@ -406,7 +406,6 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-
 ### 5.2. Crafting the Dependency Information Display
 
 <p align="justify"> Now we can jump over to the dependencies section and make task P2 link to the id of task P1, this link should always be created by actually referencing the respective id cell in order to make sure that the linked id number is correctly updated in case the other item's id changes due to an inserted or deleted row. To help the user instantly see if the linked id is an actual cell reference and not just a fixed number typed in, we make use of the previously defined conditional formatting rule that gives the cell content a blue font color in case it contains a formula. We increased the conditional formatting rule range by adding a comma and selecting the "d.id" column, and now this reference id is colored blue which tells us it links to another cell. </p> 
@@ -430,6 +429,8 @@ Please be aware that this repository's visual explanations are presented through
 ```
 (*) = IFERROR("("&@d.type&")"&@ IF(LEN(@d.name)>7; LEFT(@d.name;7)&"…"; d.name);"")
 ```
+</br>
+</br>
 
 ### 5.3. Building the Dependency Connection
 <!--
