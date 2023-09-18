@@ -341,11 +341,13 @@ Please be aware that this repository's visual explanations are presented through
 ```
 ![Doc4 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/52065492-395f-4e30-a27e-a0966e3d980d)
 
-<p align="justify"> Let's also update the formula in the other rows of that column and, this time, the "plan_start" has to be calculated backwards based on the "plan_end". First, we check if "ind.end" is non-empty and, if that's the case, we use the WORKDAY function, put in the "plan_end" calculation as the start date of the WORKDAY function and then add the negative number of "workdays" (-1, the idea is again going day by day but backwards); so we multiply the workdays by -1.  Since the "end_date" is already one of these 10 "workdays" we have to add one again to make it only go back 9 workdays, otherwise, if "ind.end" is empty we just return an empty text string (*). We now have successfully reproduced the exact same time span that we had before so, again, let's take that sub calculation and create a new name reference that we call "plan_start_calculation". Update the other rows in the "Plan start" column and test if it recreates these time spans by providing only independent end dates. </p>
+<p align="justify"> Let's also update the formula in the other rows of that column and, this time, the "plan_start" has to be calculated backwards based on the "plan_end". First, we check if "ind.end" is non-empty and, if that's the case, we use the WORKDAY function, put in the "plan_end" calculation as the start date of the WORKDAY function and then add the negative number of "workdays" (-1, the idea is again going day by day but backwards); so we multiply the workdays by -1.  Since the "end_date" is already one of these 10 "workdays" we have to add one again to make it only go back 9 workdays, otherwise, if "ind.end" is empty we just return an empty text string (*). We now have successfully reproduced the exact same time span that we had before so, again, let's take that sub calculation and create a new name reference that we call "plan_start_calculation" (**). Update the other rows in the "Plan start" column and test if it recreates these time spans by providing only independent end dates. </p>
 
 ```
 (*) = IF(ind.start<>""; plan_end_calculation;
-                        IF(ind.end<>""; WORKDAY(plan_end; (-1)*workdays+1) ""))
+                        IF(ind.end<>""; WORKDAY(plan_end; (-1)*workdays+1); ""))
+
+(**) plan_start_calculation = WORKDAY(plan_end; (-1)*workdays+1)
 ```
 ![Doc4 9](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/b48d64f8-8dd4-4e78-b135-a947f0e02809)
 
@@ -439,11 +441,41 @@ Please be aware that this repository's visual explanations are presented through
 
 <p align="justify"> Let's move on to the heart of the dependency engine which is the selection of the type of dependency connection we want to have in the column "d.conn". Head to the "Data" tab and add a drop-down list using "Data Validation" which will let us select one of four different connection types: finish to start, start to start start to finish, and finish to finish. The first letter always refers to the other item and the second letter to the current item. A great way to provide some basic information and instructions for an input column like this, is to select the header cell, then open the data validation window and go to the "Input message" tab. This section allows us to enter an informative message that is displayed whenever this cell is selected. The column next to "d.conn" is "d.lag" and will allow us to define a lag by which we want the lagged item to be shifted to the right in case we have a positive value or to the left if it is negative. Let's set the text alignment to center for both these columns, adjust the column size and create dynamic name references for both these columns. Call the first one "d.conn", the second one "d.lag" and make them both row relative. </p>
 
-<p align="justify"> Now we have all the values, variables and information available to make the dependency logic part of the ""Plan start"" and ""Plan end"" columns' formulas. If you remember what I already said, the hierarchical logic works as it follows; both the ""Plan start"" and ""Plan end"" formulas always start by look at the "ind.start" value and only if that cell is empty they consider the "ind.end' value, and only if that cell is also empty they will now consider the dependency section and do the date calculations based on what is in there. </p>
+![Doc5 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/77f20079-ea41-4aaa-b1b4-99a77ecddb41)
 
-<p align="justify"> So let's start with the "Plan start" formula. We are going to replace the final empty string with a completely new expression. In this new formula portion, first we will check if "d.id" is non-empty, otherwise, there is nothing that could be calculated. In case it is non-empty we can take a look at what connection type has been selected for the "Plan start" formula (d.conn = "FS"). The most common one is the finish to start dependency, in that case you want to do the respective calculation for which we simply enter a placeholder for now ("fs_calc"). Alternatively, if the selected dependency connection type is start to start we want to do the respective start to start calculation ("ss_calc"). In case it is one of the other two dependency connection types, then we know that the "Plan end" date will be tied to the other item start and we need to do the backwards calculation based on the "Plan end" date and the number of required workdays. Guess what? we have already define this backwards calculation as "plan_start_calculation". Now we only have to close these brackets for the last two if statements, then provide a fallback value in case the id is empty and eventually close that bracket as well. For now with finish to start or start to start selected (FS or SS) the respective placeholder appears correctly and, once we select one of the other two types we get an error because the formula assumes that the "Plan end" date is already available, which is not the case. Yet to catch these errors, let's wrap this formula inside an IFERROR statement just to make sure it will always display an empty string in such case. </p>
+<p align="justify"> Now we have all the values, variables and information available to make the dependency logic part of the "Plan start" and "Plan end" columns' formulas. If you remember what I already said, the hierarchical logic works as it follows; both the "Plan start" and "Plan end" formulas always start by look at the "ind.start" value and only if that cell is empty they consider the "ind.end' value, and only if that cell is also empty they will now consider the dependency section and do the date calculations based on what is in there. </p>
 
-<p align="justify"> For the "Plan end" formula, we're going to implement the same exact pattern. Instead of returning an empty string we first check if "d.id" is non-empty and if that is the case we now check if "d.conn" equals one of the two finish dependency connection types which are start-to-finish (SF) and alternatively finish to finish (FF), otherwise, in case it is one of the other two values we need to calculate the "Plan end" based on the "Plan start" and the number of required workdays, which is already covered in the "plan_end_calculation". Let's close both these if statements, enter a fallback value in case "d.id" is empty and we can also directly wrap the whole formula in an IFERROR function to catch potential errors. The basic logic of when to do which calculation is now implemented when switching between different "d.conn" values, the placeholders perfectly show us which one, the "Plan start" or "Plan end", is the one being calculated based on the other item. </p>
+```
+(*) Plan start column formula (before) = IF(ind.start<>""; plan_end_calculation;
+                                                          IF(ind.end<>""; plan_start_calculation; ""))
+```
+
+<p align="justify"> So let's start with the "Plan start" formula. We are going to replace the final empty string with a completely new expression. In this new formula portion, first we will check if "d.id" is non-empty, otherwise, there is nothing that could be calculated. In case it is non-empty we can take a look at what connection type has been selected for the "Plan start" formula (d.conn = "FS"). The most common one is the finish-to-start dependency, in that case you want to do the respective calculation for which we simply enter a placeholder for now ("fs_calc"). Alternatively, if the selected dependency connection type is start to start we want to do the respective start-to-start calculation ("ss_calc"). In case it is one of the other two dependency connection types, then we know that the "Plan end" date will be tied to the other item start and we need to do the backwards calculation based on the "Plan end" date and the number of required workdays. Guess what? we have already define this backwards calculation as "plan_start_calculation". Now we only have to close these brackets for the last two if statements, then provide a fallback value in case the id is empty and eventually close that bracket as well. For now with finish to start or start to start selected (FS or SS) the respective placeholder appears correctly and, once we select one of the other two types we get an error because the formula assumes that the "Plan end" date is already available, which is not the case. Yet to catch these errors, let's wrap this formula inside an IFERROR statement just to make sure it will always display an empty string in such case (*). </p>
+
+```
+(*) = IFERROR( @IF(ind_start>0; ind_start;
+                      IF(ind_end<>""; plan_start_calculation;
+                                      IF(d.id<>"";
+                                                IF(d.conn="FS"; "fs_calc";
+                                                IF(d.conn="SS"; "ss_calc";
+                                                plan_start_calculation));"")));"")
+
+```
+
+![Doc5 6](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/1968bedf-83a1-4bfe-aa6b-c9b93258caab)
+
+<p align="justify"> For the "Plan end" formula, we're going to implement the same exact pattern. Instead of returning an empty string we first check if "d.id" is non-empty and if that is the case we now check if "d.conn" equals one of the two finish dependency connection types which are start-to-finish (SF) and alternatively finish to finish (FF), otherwise, in case it is one of the other two values we need to calculate the "Plan end" based on the "Plan start" and the number of required workdays, which is already covered in the "plan_end_calculation". Let's close both these if statements, enter a fallback value in case "d.id" is empty and we can also directly wrap the whole formula in an IFERROR function to catch potential errors. The basic logic of when to do which calculation is now implemented when switching between different "d.conn" values, the placeholders perfectly show us which one, the "Plan start" or "Plan end", is the one being calculated based on the other item (*). </p>
+
+```
+(*) = IFERROR( @IF(ind_start<>""; plan_end_calculation;
+                              IF(ind_end<>""; ind_end;
+                                                     IF(d.id<>"";
+                                                                IF(d.conn="SF"; "sf_calc";
+                                                                IF(d.conn="FF"; "ff_calc";
+                                                                plan_end_calculation));"")));"")
+```
+
+![Doc5 7](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/484ea1ab-0f51-4528-b968-a7d9ed4ec727)
 
 <p align="justify"> With all the preparation ready we are set to replace these placeholder calculations with some actual calculations. For the finish-to-start calculation (FS) we need to set the "Plan start" date to the workday after the "Plan end" date of the connected item. The WORKDAY function is the one that allows us to do exactly this calculation, we only need to grab the "Plan end" date of the connected item value but, as we already know the row of the other item, we can simply return this end date value using the INDEX function by entering column T as the return array and "d.row" as the row. With this, we now have a start date defined in the WORKDAY function and we only need to specify the number of workdays we want to add to this date (1) plus the lag days as "d.lag". The most important aspect is that when we change the duration of the first task, the plan dates of the second task are updated correctly. </p>
 
@@ -458,6 +490,16 @@ Please be aware that this repository's visual explanations are presented through
 <p align="justify"> Update all the cells in the "Plan start" and "Plan end" columns with the newly built formulas. Do the same for the "d.item" column and, since finish-to-start is the default value in the dependency calculation, I suggest to just paste it as an actual value for all cells in the "d.conn" column and then make the columns behind the "d.id" column invisible. As long as no "d.id" is referenced we can achieve that with one simple conditional formatting rule; this rule will check if "d.id" is empty, in that case change the font color to white, that way nothing is visible. </p>
 
 <p align="justify"> Let's recapitulate, the input logical hierarchy we've implemented during this whole formula development. We have built them into both the "Plan start" and "Plan end" columns and, with these updated versions of both formulas, the dependency functionality or mode has the last place in this hierarchy. This means it is overwritten by both the "ind_end" date and "ind_start" date, which manually entered by the user. Finally, in the last layer, the "ind_end" date is overwritten by the "ind_start" date. For the dependency connection this means, it becomes inactive whenever at least one of the independent dates is non-empty. So let's add the same graying out conditional formatting to the dependency section as we did with the independent end date column ("Ind.End"). This rule checks if at least one of the independent dates ("ind_start" or "ind_end") is non-empty, in case that is true we set the font color to a mid-gray. When the rule is applied we can see it makes the "d.conn" values appear again, so let's just move it below this rule. </p>
+
+```
+(*) = =IFERROR(@IF(ind_start>0;ind_start;
+                  IF(ind_end<>"";plan_start_calculation;
+                                IF(d.id<>"";
+                                IF(OR(d.conn="FS";d.conn="");fs_calc;
+                                IF(d.conn="SS";ss_calc;
+                                plan_start_calculation));"")));"")
+
+```
 
 <!--
 ### 5.4. Dependency planning. Example
