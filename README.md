@@ -438,7 +438,7 @@ Please be aware that this repository's visual explanations are presented through
 </br>
 </br>
 
-### 5.3. Building the Dependency Connection
+### 5.3. Building the Dependency Connection ENgine
 
 <p align="justify"> Let's move on to the heart of the dependency engine which is the selection of the type of dependency connection we want to have in the column "d.conn". Head to the "Data" tab and add a drop-down list using "Data Validation" which will let us select one of four different connection types: finish to start, start to start start to finish, and finish to finish. The first letter always refers to the other item and the second letter to the current item. A great way to provide some basic information and instructions for an input column like this, is to select the header cell, then open the data validation window and go to the "Input message" tab. This section allows us to enter an informative message that is displayed whenever this cell is selected. The column next to "d.conn" is "d.lag" and will allow us to define a lag by which we want the lagged item to be shifted to the right in case we have a positive value or to the left if it is negative. Let's set the text alignment to center for both these columns, adjust the column size and create dynamic name references for both these columns. Call the first one "d.conn", the second one "d.lag" and make them both row relative. </p>
 
@@ -542,7 +542,9 @@ Great let's do some example planning with the dependency engine for all the item
 </br>
 </br>
 
-## 6. Dynamic Project Timespan 
+## 6. Dynamic Project Timespan
+
+### 6.1. Defining the name references
 
 <p align="justify"> These stages perfectly summarize the duration and time span of their respective tasks and milestones. However, we want to implement a feature that goes one level above that and dynamically keeps track of and visualizes the whole project time span. To do this, we will collapse the extended planning section and focus on the "Plan start" and "Plan end" columns. Using the values in these two columns, we will compute the project time span and duration in workdays. </p>
 
@@ -562,6 +564,8 @@ Great let's do some example planning with the dependency engine for all the item
 
 ![Doc6 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/108b9041-7da9-43bd-9a2f-c177de83cf44)
 
+### 6.2. Visualizing the information in the Timeline Area
+
 <p align="justify"> We can now use this information to visualize the project time span in the timeline area. We will make use of the row that is right on top of the current timeline and add a conditional formatting rule to these cells. We want to format all cells for which the date in the timeline is greater than or equal to the "project_start" and smaller than or equal to the "project_end" (*). All the cells for which this condition is true shall get a neat green background fill. That seems to work pretty well, but it still doesn't look perfect because the row still has this standard height, which is a bit over the top. So, we need to make this row much tighter. We will remove this temporary unicode icon description and set a row height to 6 pixels. We will add a similar conditional formatting rule to the actual timeline date rows. The formula for this rule is exactly the same, but for this one, we just make the background a bit darker by changing the fill to this slightly darker gray tone. Both these conditional formattings in combination result in a pretty refined visualization of the project time span. With any change in the schedule, may it be a change in task durations or a change in a dependency structure, this visualization smoothly updates to always capture the full project time span. In addition, this feature becomes even more valuable whenever we have a really large project because once we scroll down and the upper stages are not visible anymore, we still see the overall project time span in relation to the currently visible items, which is pretty amazing. </p>
 
 ```
@@ -569,6 +573,8 @@ Great let's do some example planning with the dependency engine for all the item
 ```
 
 ![Doc6 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/54fa7011-185f-4ec6-86a7-f399bf017f5c)
+
+### 6.3. Solving a couple of weak points
 
 <p align="justify"> Now that this project time span is dynamically computed, there are still two weak points that we have to take care of. The first weak point becomes apparent when we take a closer look at the initial timeline date cell, because that one is referencing the dynamic "project_start" date visualized in the header. That makes us run into a lot of errors when no dates are provided in a "Plan start" column, because now the "project_start" date value is just 0. To make sure this doesn't happen, we will make the timeline start date more robust than a simple reference to the "project_start" date. We will create a perfectly tailored name calculation called "timeline_plan_start". We will set the scope to this worksheet, and what we want to do in this calculation is first check if "project_start" equals 0 (= IF(project_start=0; ), because then we want to use the TODAY function as the fallback value for the timeline start (;TODAY()). In order to make sure that it always shows the beginning day of the week of today, we simply subtract the weekday number of today with an encoding that returns 0 for Monday up until 6 for Sunday (;TODAY() - WEEKDAY(TODAY();3); ). That way, in case today is a Wednesday, for example, this expression subtracts 2 and returns to Monday of the week. Only in case "project_start" is not zero, then we return this "project_start" value minus its weekday number (; project_start - WEEKDAY(project_start)) with the same encoding. Then we will replace this original formula in this first timeline date cell with the defined named calculation. </p>
 
