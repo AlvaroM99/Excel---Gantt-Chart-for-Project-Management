@@ -186,7 +186,7 @@ Please be aware that this repository's visual explanations are presented through
 
 </br>
 </br>
-
+</br>
 
 ## 2. Basic dynamic structuring of the "Item Details" section 
 
@@ -224,8 +224,7 @@ Please be aware that this repository's visual explanations are presented through
 
 </br>
 </br>
-
-
+</br>
 
 ## 3. Role & Team Management system 
 
@@ -280,6 +279,7 @@ Please be aware that this repository's visual explanations are presented through
 
 ![Doc3 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/a7cb92c8-f21f-4bb7-9622-ca9fa054afb8)
 
+</br>
 </br>
 </br>
 
@@ -383,6 +383,7 @@ Please be aware that this repository's visual explanations are presented through
 
 </br>
 </br>
+</br>
 
 ## 5. Dynamic Planning with Dependency Engine
 
@@ -468,49 +469,80 @@ Please be aware that this repository's visual explanations are presented through
 
 ```
 (*) = IFERROR( @IF(ind_start<>""; plan_end_calculation;
-                              IF(ind_end<>""; ind_end;
-                                                     IF(d.id<>"";
-                                                                IF(d.conn="SF"; "sf_calc";
-                                                                IF(d.conn="FF"; "ff_calc";
-                                                                plan_end_calculation));"")));"")
+                                  IF(ind_end<>""; ind_end;
+                                                         IF(d.id<>"";
+                                                                    IF(d.conn="SF"; "sf_calc";
+                                                                    IF(d.conn="FF"; "ff_calc";
+                                                                    plan_end_calculation));"")));"")
 ```
 
 ![Doc5 7](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/484ea1ab-0f51-4528-b968-a7d9ed4ec727)
 
-<p align="justify"> With all the preparation ready we are set to replace these placeholder calculations with some actual calculations. For the finish-to-start calculation (FS) we need to set the "Plan start" date to the workday after the "Plan end" date of the connected item. The WORKDAY function is the one that allows us to do exactly this calculation, we only need to grab the "Plan end" date of the connected item value but, as we already know the row of the other item, we can simply return this end date value using the INDEX function by entering column T as the return array and "d.row" as the row. With this, we now have a start date defined in the WORKDAY function and we only need to specify the number of workdays we want to add to this date (1) plus the lag days as "d.lag". The most important aspect is that when we change the duration of the first task, the plan dates of the second task are updated correctly. </p>
+</br>
+</br>
 
-<p align="justify"> For the start-to-start (SS) calculation we can now simply copy over that formula as we only need to make some tiny adjustments. For this one we want both items to start together so this time, instead of grabbing the other item's "Plan end" date, we now need to grab the other item's planned start date from column S and for the day's argument, we're going to remove the one because is not the next day but the same day that we want (it will only be shifted by a potentially given lag). For better maintainability and less complexity in this huge formula, let's transform both these expressions into named calculations. The first one will be called "fs_calc" and the second one "ss_calc". </p>
+<p align="justify"> With all the preparation ready we are set to replace these placeholder calculations with some actual calculations. For the finish-to-start calculation (FS) we need to set the "Plan start" date to the workday after the "Plan end" date of the connected item. The WORKDAY function is the one that allows us to do exactly this calculation, we only need to grab the "Plan end" date of the connected item value but, as we already know the row of the other item, we can simply return this end date value using the INDEX function by entering column T as the return array and "d.row" as the row. With this, we now have a start date defined in the WORKDAY function and we only need to specify the number of workdays we want to add to this date (1) plus the lag days as "d.lag" (*). The most important aspect is that when we change the duration of the first task, the plan dates of the second task are updated correctly. </p>
 
-<p align="justify"> Let's jump right over to the "Plan end" formula. We're now going to create similar expressions for the two finish dependency connection types. For start-to-finish calculation (SF) we want to have the "Plan end" date of the item one day before the planned start of the other item, plus a potential lag. That means we're going to make use of the WORKDAY function again and, as the date to start with, we're going to grab the other item "Plan start" by applying the INDEX function to column S with "d.row" as the returned row. Since we want to calculate the workday right before that date we add -1 plus the potential lag value. Let's close that statement, hit enter, and change the dependency connection to start to finish to see if it works. </p>
-
-<p align="justify"> Finally, for the finish-to-finish dependency connection type (FF) let's copy over the "SF" expression, remove the -1 and grab the other item's date from column T instead of column S, as we need the "Plan end" date. Like that, both items now will finish together on the same day, but potentially shifted by a given lag. We can now transform both these new expressions in the "Plan end" formula into two new named calculations, the first one called "sf_calc" and the other one "ff_calc". </p>
-
-<p align="justify"> In this whole dependency logic there is only one thing left to consider. So far we haven't considered that the user might not select a dependency connection, so the cell is empty. With the setup we've built that will result in a circular reference, that's the reason why a warning pops up. This occurs because both the "Plan start" and "Plan end" formulas try to calculate their dates based on each other, as neither of them is able to find one of their two relevant dependency connection types in there, so the "plan_start_calculation" and the "plan_end_calculation" are executed at the same time. We can easily avoid this by setting a default value in case "d.conn" is empty, in my opinion finish-to-start is the most intuitive choice here. The quickest approach is making "FS" the default value by applying the finish to start calculation ("fs_cal") within the "Plan start" formula either if "d.conn" equals "FS" or "d.conn" equals nothing (" "). </p>
-
-<p align="justify"> Update all the cells in the "Plan start" and "Plan end" columns with the newly built formulas. Do the same for the "d.item" column and, since finish-to-start is the default value in the dependency calculation, I suggest to just paste it as an actual value for all cells in the "d.conn" column and then make the columns behind the "d.id" column invisible. As long as no "d.id" is referenced we can achieve that with one simple conditional formatting rule; this rule will check if "d.id" is empty, in that case change the font color to white, that way nothing is visible. </p>
-
-<p align="justify"> Let's recapitulate, the input logical hierarchy we've implemented during this whole formula development. We have built them into both the "Plan start" and "Plan end" columns and, with these updated versions of both formulas, the dependency functionality or mode has the last place in this hierarchy. This means it is overwritten by both the "ind_end" date and "ind_start" date, which manually entered by the user. Finally, in the last layer, the "ind_end" date is overwritten by the "ind_start" date. For the dependency connection this means, it becomes inactive whenever at least one of the independent dates is non-empty. So let's add the same graying out conditional formatting to the dependency section as we did with the independent end date column ("Ind.End"). This rule checks if at least one of the independent dates ("ind_start" or "ind_end") is non-empty, in case that is true we set the font color to a mid-gray. When the rule is applied we can see it makes the "d.conn" values appear again, so let's just move it below this rule. </p>
+<p align="justify"> For the start-to-start (SS) calculation we can now simply copy over that formula as we only need to make some tiny adjustments. For this one we want both items to start together so this time, instead of grabbing the other item's "Plan end" date, we now need to grab the other item's planned start date from column S and for the day's argument, we're going to remove the one because is not the next day but the same day that we want (it will only be shifted by a potentially given lag) (**). For better maintainability and less complexity in this huge formula, let's transform both these expressions into named calculations. The first one will be called "fs_calc" and the second one "ss_calc". </p>
 
 ```
-(*) = =IFERROR(@IF(ind_start>0;ind_start;
-                  IF(ind_end<>"";plan_start_calculation;
-                                IF(d.id<>"";
-                                IF(OR(d.conn="FS";d.conn="");fs_calc;
-                                IF(d.conn="SS";ss_calc;
-                                plan_start_calculation));"")));"")
+(*) "fs_calc" = WORKDAY( INDEX($T:$T; d.row); 1+d.lag)
+(**) "ss_calc" = WORKDAY( INDEX($S:$S; d.row); d.lag)
+```
+![Doc5 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/ea4ec9c2-16f4-4e20-8dee-2b2a0a4a49ea)
 
+<p align="justify"> Let's jump right over to the "Plan end" formula. We're now going to create similar expressions for the two finish dependency connection types. For start-to-finish calculation (SF) we want to have the "Plan end" date of the item one day before the planned start of the other item, plus a potential lag. That means we're going to make use of the WORKDAY function again and, as the date to start with, we're going to grab the other item "Plan start" by applying the INDEX function to column S with "d.row" as the returned row. Since we want to calculate the workday right before that date we add -1 plus the potential lag value (*). Let's close that statement, hit enter, and change the dependency connection to start to finish to see if it works. </p>
+
+<p align="justify"> Finally, for the finish-to-finish dependency connection type (FF) let's copy over the "SF" expression, remove the -1 and grab the other item's date from column T instead of column S, as we need the "Plan end" date. Like that, both items now will finish together on the same day, but potentially shifted by a given lag (**). We can now transform both these new expressions in the "Plan end" formula into two new named calculations, the first one called "sf_calc" and the other one "ff_calc". </p>
+
+```
+(*) "sf_calc" = WORKDAY( INDEX($S:$S; d.row); (-1)+d.lag)
+(**) "ff_calc" = WORKDAY( INDEX($T:$T; d.row); d.lag)
+```
+
+![Doc5 9](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/d75fd4da-762c-4c78-a939-47ae7fd0688b)
+
+</br>
+</br>
+
+<p align="justify"> In this whole dependency logic there is only one thing left to consider. So far we haven't considered that the user might not select a dependency connection, so the cell is empty. With the setup we've built that will result in a circular reference, that's the reason why a warning pops up. This occurs because both the "Plan start" and "Plan end" formulas try to calculate their dates based on each other, as neither of them is able to find one of their two relevant dependency connection types in there, so the "plan_start_calculation" and the "plan_end_calculation" are executed at the same time. We can easily avoid this by setting a default value in case "d.conn" is empty, in my opinion, finish-to-start is the most intuitive choice here. The quickest approach is making "FS" the default value by applying the finish-to-start calculation ("fs_cal") within the "Plan start" formula either if "d.conn" equals "FS" or "d.conn" equals nothing (" "). </p>
+
+![Doc5 10](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/930e9fea-17a1-48c3-9cfa-2e6fb87fefde)
+
+<p align="justify"> Update all the cells in the "Plan start" and "Plan end" columns with the newly built formulas. Do the same for the "d.item" column and, since finish-to-start is the default value in the dependency calculation, I suggest just pasting it as an actual value for all cells in the "d.conn" column and then making the columns behind the "d.id" column invisible. As long as no "d.id" is referenced we can achieve that with one simple conditional formatting rule; this rule will check if "d.id" is empty, in that case, change the font color to white, that way nothing is visible. </p>
+
+![Doc5 11](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/51ef1100-3fb7-4092-8129-551a8ddbd720)
+
+<p align="justify"> Let's recapitulate, the input logical hierarchy we've implemented during this whole formula development. We have built them into both the "Plan start" and "Plan end" columns and, with these updated versions of both formulas, the dependency functionality or mode has the last place in this hierarchy. This means it is overwritten by both the "ind_end" date and "ind_start" date, which are manually entered by the user. Finally, in the last layer, the "ind_end" date is overwritten by the "ind_start" date. For the dependency connection this means, it becomes inactive whenever at least one of the independent dates is non-empty. So let's add the same graying out conditional formatting to the dependency section as we did with the independent end date column ("Ind.End"). This rule checks if at least one of the independent dates ("ind_start" or "ind_end") is non-empty, in case that is true we set the font color to a mid-gray. When the rule is applied we can see it makes the "d.conn" values appear again, so let's just move it below this rule. The final formulas in the "plan start" column (*) and "Plan end" column (**) are written below. </p>
+
+```
+(*) Plan start column (final result) = IFERROR(@IF(ind_start>0;ind_start;
+                                                  IF(ind_end<>"";plan_start_calculation;
+                                                                IF(d.id<>"";
+                                                                            IF(OR(d.conn="FS";d.conn="");fs_calc;
+                                                                            IF(d.conn="SS";ss_calc;
+                                                                            plan_start_calculation));"")));"")
+```
+```
+(**) Plan end column (final result) = IFERROR( @IF(ind_start<>""; plan_end_calculation;
+                                                  IF(ind_end<>""; ind_end;
+                                                                          IF(d.id<>"";
+                                                                                      IF(d.conn="SF";sf_calc;
+                                                                                      IF(d.conn="FF";ff_calc;
+                                                                                      plan_end_calculation));"")));"")
 ```
 
 <!--
 ### 5.4. Dependency planning. Example
 
 Great let's do some example planning with the dependency engine for all the items that we have set up so far we gonna make this task dependent on the preceding task with a simple finish to start dependency and see how the task has one workday by default and as soon as we enter a number higher than that it grows to the right in a similar manner we could now make the milestone dependent on that last task in that stage by referencing id4 but in cases like that where we simply want to have consecutive item dependencies there's a beautiful shortcut you can use which is the autofill function simply select the dot id of the preceding item and then drag this auto fill handle down and since this is a relative reference in there this auto filled reference now links to the next id which is 4. for milestones i generally prefer a finish to finish dependency as a milestone is often logically tied to the successful completion of one or multiple tasks for the second stage we can start by copying over the autostage formulas because we already know the amount of items in that stage in case that stage had a different number of items we could easily just click into the formula and adjust the referenced range to cover all of the items and the same for the auto stage workday formula using this stage i want to demonstrate how you can easily make a stage dependent on another stage for example with a finish to start dependency connection all you have to do is to determine which one is the initial item in the second stage then link this item to the first stage and make the subsequent items directly or indirectly dependent on the initial item for consecutive dependencies within the stage we only have to link the second item to the first one and then we can use the autofill function to create consecutive dependencies for the last two items let's change the milestones dependency connection type to finish to finish and enter the number of required workdays for the tasks see how easy that was both these stages are now tied together and every change that impacts the first stages plan and date like for example an increased duration or change in dependency structure within that stage will make the second stage automatically adjust its schedule accordingly now that was a classic forward scheduling dependency connection between stages because we have made the start of the second stage dependent on the other stage we can also create a backward scheduling dependency for these stages by making the plan and date of the second stage dependent on the other stage for example as a finish to finish dependency that would mean the stage and date is fixed and every increase in duration of this stage would make the stage grow backwards to achieve that we have to reverse the dependency logic in that second stage initially we determine a final item in that stage in this case this would most likely be the milestone then link this final item to the other stage and make all the other items of that stage directly or indirectly dependent on that one so we update these dependencies accordingly by clicking into the did cell of the milestone and dragging it to the id of the first stage now this is connected to the first stage with the finish to finish dependency then we make that last task dependent on that milestone with the finish to finish dependency and for the upper two tasks we can use the autofill function again and only have to update the dependency connection type to start to finish for both of them whenever we increase the duration of these items the whole stage now grows backwards and we need to start earlier of course once the "Plan end" date of the first stage is moved to the right into the future that will now move both the planned start and plan and of the second stage back to the right again for the sake of completeness let's also transform this back into his stage finish to start dependency connection by updating the initial item's did to link to the first stage again make the subsequent items consecutively dependent on that initial one and change all the dependency connection types for the tasks back to finish to start as you see even these fundamental changes in the dependency structure of that schedule can be done within a few seconds that's amazing let's also take a quick look at how to extend the stage with additional items let's add two additional tasks and one milestone to the second stage the first thing you should do in case you have applied the auto stage formulas click into them and adjust the referenced range to also cover these new items same for the workdays to enable the stage to cover the full stage time span for simple consecutive relationships we use the autofill handle then change the milestone dependency connection to finish to finish and enter the number of required workdays for the tasks be aware that this is just a simple example you are totally free to always transform this into a way more complex dependency structure for example we can make this task i4 start together with the initial tasks simply by updating the linked id and switching to a start to start dependency connection now a change in duration of these two tasks not necessarily has an impact on the overall stage duration as these tasks run in parallel now or let's say we want both of these milestones to finish at the same day and figure out what does that implicate for the required start date of the last two tasks let's make this milestone dependent on the other one and these two tasks now dependent on that second milestone with a finish to finish and for this one a start to finish dependency given this setup once we increase the number of workdays here we now just have to start earlier and now this even has an impact on the stage time span all these examples are only a small fraction of all the possible dependency structures you can build so the opportunities with this dependency engine feature are basically endless as quick as we had added these three items within seconds we can also delete them you see the ids on the left perfectly update the reference ranges of the auto stage formulas also do not require a manual update and as we have just deleted a few of these content rows and now only have 16 left at the moment we can easily add new ones anytime just by selecting the last row and using the auto fill feature as soon as we have more potential rows in this gantt chart than fitting on the screen we would need to scroll down in order to see all of them but instead of applying the scrolling to the whole worksheet i recommend to scroll to the top once then select the initial row of the gantt area go to the view tab and click on freeze panes to freeze the header including the separator row now only the gantt area below the header is moved when we scroll and that way it is way more user friendly before we continue let's use this additional space for adding two more stages to this gantt chart we call this one rollout prep and make it dependent on the second stage with a finish to finish dependency connection so this stage is affected by changes in both the second and the first stage and then we add another stage called roll out that will just start right after the rollout prep stage has finished it is simply amazing how quickly the setup of a fully dynamic project plan can be done with this feature as it's incredibly intuitive fast and easy to use and another amazing thing is whenever you're done setting up the dependency structure for your project plan you can just collapse all these columns with one click and that gives you just a clean and dense overview of the most crucial information about the scheduled plan and you still have full control over the workload so adjusting the number of required workdays for an item can be done even in this dense view and anytime you want to make a change in the underlying dependency structure simply reopen the section and you are good to go right at the moment 
-
-</br>
-</br>
 -->
 
-### 6. Dynamic Project Timespan 
+</br>
+</br>
+</br>
+
+## 6. Dynamic Project Timespan 
 
 <p align="justify"> These stages perfectly summarize the duration and time span of their respective tasks and milestones. However, we want to implement a feature that goes one level above that and dynamically keeps track of and visualizes the whole project time span. To do this, we will collapse the extended planning section and focus on the "Plan start" and "Plan end" columns. Using the values in these two columns, we will compute the project time span and duration in workdays. </p>
 
