@@ -781,5 +781,6 @@ To perfectly complement the ProQuest tracking feature, we are now introducing a 
 
 <p align="justify"> For example, we can easily create a high-level view of the project by displaying stages only, which gives us a compressed view of the full schedule and the general project progress. Removing the filter is as easy as pressing the filter command one more time. Since we have defined a stage ID in an own column, we can use the filter command to only display selected stages, including their task and milestone items. That allows us to have multiple stages that are actually placed far apart from each other in a condensed view. Another great idea is to filter by the assigned team role, which allows you to break down the project not simply based on single team members, but instead based on areas of responsibility. Two other really interesting columns are the date columns because when applying a filter to one of these, you can choose from a huge selection of specific date filters. </p>
 
+![Doc12 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/5df66ed7-04bc-4d49-8f51-1a14e76d104b)
 
-
+</br>
