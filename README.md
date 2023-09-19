@@ -748,6 +748,7 @@ To perfectly complement the ProQuest tracking feature, we are now introducing a 
 
 </br>
 </br>
+</br>
 
 ## 11. Scroll Buttons
 
@@ -763,10 +764,16 @@ To perfectly complement the ProQuest tracking feature, we are now introducing a 
 
 </br>
 </br>
+</br>
 
 ## 12. Manage & Filter Items (Via Quick Access Toolbar)
 
 <p align="justify"> To make the most out of this template, I'd like to give you some additional advice on how to add, manage, and filter items in this Gantt chart. The most common way of adding new items is simply adding them at the bottom. If you want to add multiple items, make sure that you have one empty row available that is part of the Gantt chart. Then you can easily select the whole row and use the autofill function to add as many new rows to the Gantt chart as you want with the same conditional formatting rules, drop-down menus and formulas. If you want to insert an item between other items, for example, I recommend using the quick access toolbar. This is the section in your Excel application that, by default, includes save, undo, and redo commands. You can add more commands, these are the ones I consider useful for a better user experience: fill down, fill up, insert rows, and filter. You can customize the quick access tool-bar ribbon in the Excel Settings, simply select the command on the left side, click on add, and potentially change the order of these commands. </p>
+
+![Doc12 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7957fa5b-28e1-4d83-95a7-17cf60312848)
+
+</br>
+</br>
 
 ### 12.1. Filtering
 
