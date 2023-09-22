@@ -1,4 +1,4 @@
-# Excel - Gantt Chart for Project Management
+-# Excel - Gantt Chart for Project Management
 
 </br>
 
