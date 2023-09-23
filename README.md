@@ -693,6 +693,8 @@ Great let's do some example planning with the dependency engine for all the item
 
 <p align="justify"> The only reason why the other stages are not visible yet is that we haven't set up the conditional formatting rules corresponding to their color codes. For now let's outsource the "ps_cc" color code creation expression into an own named calculation that we call "color_code_project_structure", and then replace this expression in the main formula using that defined name. </p>
 
+![Doc7 9](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/da30abd5-05db-4c52-9404-8371ea675cf3)
+
 </br>
 </br>
 
@@ -705,6 +707,8 @@ Great let's do some example planning with the dependency engine for all the item
 ```
 (*) = IFNA(MATCH(role; Settings!$I9$:$I16$; 0); -1)
 ```
+
+![Doc7 10](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/fe578365-2804-4407-a590-83ae86817abb)
 
 <p align="justify"> I still want to make one additional modification to this formula. In my opinion it makes sense to limit the team member assignment to tasks and milestones because these are always connected to real actions, while stages tend to be more abstract concepts mainly used to better structure the whole project and to group items. So my preferred approach, at least for this color-related visualization, is to only return a role id for tasks and milestones while for stages we simply going to return a -1 (*). With this modification you can still assign a team member to a stage if you like but it won't be considered by the auto-coloring engine. </p>
 
