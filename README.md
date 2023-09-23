@@ -655,6 +655,8 @@ Great let's do some example planning with the dependency engine for all the item
                         color_code_default)
 ```
 
+![Doc7 5](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/de5c1f78-88b7-4913-8c87-4dee6df7f956)
+
 #### 7.3. "Project structure" color mode
 
 <p align="justify"> For now let's build a color code generating expression only for the "Project structure" color mode. In this mode we're going to make use of 8 main colors from our color palette and we want each stage with all its items to have a new individual main color. We're also going to need different color codes within a stage in order to represent the different types of items with different shades of the same color. </p>
