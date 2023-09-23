@@ -669,11 +669,15 @@ Great let's do some example planning with the dependency engine for all the item
 (*) = IF(type<>""; IF(ROW(stage_id)=ROW($C$14)+2; 1; IF(type="S"; MAX(prev_col_range)+1; MAX(prev_col_range))); -1)
 ```
 
+![Doc7 6](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/246acdba-faf9-4dba-a90b-3a4fd9172b9b)
+
 <p align="justify"> Now that we have the stage id defined, let's jump right into the color code formula to replace the "Project structure" placeholder with some color code generating expressions. The first thing that we gonna make sure of is, in case the stage id is -1 the color code should also be -1, which means no color will be displayed. However, in case we have an actual stage id available, we are going to build a three-digit color code that we will concatenate as a text first and then transform it into a number. For this "Project structure" mode the first digit for the main color is determined by the stage id, so we use the "stage_id" reference and concatenate it with a text string that will be returned from a SWITCH expression. Based on the selected item type, we either going add "01" for a stage item, for a task item will be "02", and for a milestone item "03". After that, this concatenated text string will then be transformed into a number by wrapping it in the NUMBERVALUE function (*). </p>
 
 ```
 (*) "ps_cc" = IF(stage_id=-1; -1; NUMBERVALUE(stage_id & SWITCH(Type;"S";"01";"T";"02";"M";"03")))
 ```
+
+![Doc7 7](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/cc7b4d31-30ed-4b2a-aaa4-f146e3422986)
 
 <p align="justify"> We now have a clean numeric encoding for the project structure that beautifully represents both the stage and the item type within each stage. But there is one limitation that we haven't considered yet, we have a limited amount of main colors in our color palette and we want to be able to create an unlimited amount of stages differentiable from the stages immediately around them. So the logical solution for this "Project structure" mode is to reuse the color palette over and over again so that after using all 8 main colors, the ninth color will be the same color as the first one, and so on. </p>
 
@@ -682,6 +686,8 @@ Great let's do some example planning with the dependency engine for all the item
 ```
 (*) "ps_cc" = IF(stage_id=-1; -1; NUMBERVALUE(IF(MOD(stage_id; 8)=0; 8; MOD(stage_id; 8)) & SWITCH(Type;"S";"01";"T";"02";"M";"03")))
 ```
+
+![Doc7 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/a1baf409-26ab-4baa-a740-a9cfe20aed8f)
 
 <p align="justify"> Let's open the conditional formatting manager for the color indicator column and create two additional rules for the first group of color codes that have a 1 as their first digit. We can simply duplicate the two rules that we already have in place for the default coloring and simply adjust the color codes that these rules are looking for. For the stage item the code is 101, the main color for this first stage is the cyan blue (#4633F2), however, the color selection order is totally up to you. In a similar manner, we adjust the formula for the task and milestone items by changing the rule to 102 and 103, and this time select a lighter shade of the same blue color. Of course we also need to set up the respective rules in the chart area. So let's open the conditional formatting manager, duplicate the three default rules below the stopper rule and change them as we did in the color indicator column. We only need to move the new coloring rules right below that stopper rule. </p>
 
