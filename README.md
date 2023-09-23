@@ -1,4 +1,4 @@
-# Excel - Gantt Chart for Project Management
+![Doc7 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/63bdc542-1307-4089-b8fb-320585a03fdc)# Excel - Gantt Chart for Project Management
 
 </br>
 
@@ -564,6 +564,9 @@ Great let's do some example planning with the dependency engine for all the item
 
 ![Doc6 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/108b9041-7da9-43bd-9a2f-c177de83cf44)
 
+</br>
+</br>
+
 ### 6.2. Visualizing the information in the Timeline Area
 
 <p align="justify"> We can now use this information to visualize the project time span in the timeline area. We will make use of the row that is right on top of the current timeline and add a conditional formatting rule to these cells. We want to format all cells for which the date in the timeline is greater than or equal to the "project_start" and smaller than or equal to the "project_end" (*). All the cells for which this condition is true shall get a neat green background fill. That seems to work pretty well, but it still doesn't look perfect because the row still has this standard height, which is a bit over the top. So, we need to make this row much tighter. We will remove this temporary unicode icon description and set a row height to 6 pixels. We will add a similar conditional formatting rule to the actual timeline date rows. The formula for this rule is exactly the same, but for this one, we just make the background a bit darker by changing the fill to this slightly darker gray tone. Both these conditional formattings in combination result in a pretty refined visualization of the project time span. With any change in the schedule, may it be a change in task durations or a change in a dependency structure, this visualization smoothly updates to always capture the full project time span. In addition, this feature becomes even more valuable whenever we have a really large project because once we scroll down and the upper stages are not visible anymore, we still see the overall project time span in relation to the currently visible items, which is pretty amazing. </p>
@@ -573,6 +576,9 @@ Great let's do some example planning with the dependency engine for all the item
 ```
 
 ![Doc6 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/54fa7011-185f-4ec6-86a7-f399bf017f5c)
+
+</br>
+</br>
 
 ### 6.3. Solving a couple of weak points
 
@@ -605,14 +611,18 @@ Great let's do some example planning with the dependency engine for all the item
 
 <p align="justify"> To add a drop-down selection, we jump straight to the data tab and open the data validation window. We allow a list of values and statically define the list of possible color modes as "Default project structure", "Team roles", and "Issues". In order to make the selected value easily usable in other formulas, we can define a static cell reference in the left corner and call it "color_by". </p>
 
+![Doc7 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/717f6961-a979-4377-b80e-43934d357791)
+
 </br>
 </br>
 
-### 7.1. How does the Color generation works now?
+### 7.1. How does the Color generation work now?
 
 <p align="justify"> The gray coloring that we currently have in place for the items in plan in the gantt chart area, is what our default color mode looks like. However, now that we want to implement way more complex and fully automated color modes, we need to introduce a system that lets us represent different coloring logics, but at the same time keeps the formulas in the conditional formatting rules pretty short, easy to understand, and easy to scale. We will build a system of numeric color codes with a "color code generating" formula that will cover the whole logic. Then the numeric color codes returned by this formula for each row will be used to create conditional formatting rules for both the color indicator section and the chart area. We make these color codes referencable by setting up a dynamic name reference called "color_code" for a newly inserted A column called "Color code" (remove de $ sign in front of the row). For now, this color code name simply references the cell content, but later we will insert the final formula directly into the name reference in order to make it a named calculation. </p>
 
 <p align="justify"> As we want all the coloring, including the default colors, to be based on color codes; let's take a quick look at how these default indicator colorings are currently organized in the color indicator column. Well, in the conditional formatting window let's first move the stage coloring rule above the task and milestone rule, and set the stop if true check mark for increased efficiency. For this default coloring, we have two rules in place that simply check what the type of item is. At the same time, we have three different rules for the chart area since the task and milestone items require a different visualization. For our new color code system, we will move these type checks (type of item) over to the color code column formula and let the result be represented by numeric codes. </p>
+
+![Doc7 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/057f5ef7-5a68-4f9b-8b7d-0033a41a924c)
 
 </br>
 </br>
@@ -625,12 +635,16 @@ Great let's do some example planning with the dependency engine for all the item
 (*) = IF(type<>""; SWITCH(type; "S"; 1; "T"; 2; "M"; 3); -1)
 ```
 
+![Doc7 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/e04d5c84-74fd-4b30-a5f0-a4d50ae19736)
+
 <p align="justify"> Let's open the conditional formatting manager for the indicator color column and change the two coloring rules with this formula. For the stage check rule we replace the logical test with "color_code" equals 1 (*), and for the task and milestone check will be replaced with "color_code" equals 2 or 3 (**). The indicator color column still works as before since the logic behind hasn't changed. So let's do the same for the chart area, we select the chart range, open the conditional formatting manager, and replace the original logical tests with a color code check. </p>
 
 ```
 (*) = color_code = 1
 (**) = OR(color_code=2; color_code=3)
 ```
+
+![Doc7 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/08e06855-e4b9-46fe-9686-f1ac26d7d255)
 
 <p align="justify"> For the whole formula implemented in the "Color mode" column, we now want to consider the selected color mode and build up the respective formula pattern to act based on it. In order to find out what the currently selected color mode is, we make use of the SWITCH function; enter the "color_by" cell reference as the expression to look at, and, in case the selected mode is "Project structure", we want to execute all the respective calculations for which we enter a placeholder value for now ("ps_cc"). In this SWITCH statement, we can now just use the "color_code_default" calculation as the default return value. Then if "Team rules" is selected as the color mode we want to do a different color code calculation ("tr_cc"), and eventually, in case "Issues" is selected another calculation will be done ("is_cc") (*). Let's update all the other cells with this adjusted formula, when we select a different color mode all the color code cells display the respective placeholder value. </p>
 
