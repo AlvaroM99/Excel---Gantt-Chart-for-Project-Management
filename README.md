@@ -752,6 +752,8 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
                                               color_code_default)
 ```
 
+![Doc7 16](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/b2625413-ef0a-40ef-9a58-ed66fccde9a0)
+
 </br>
 </br>
 </br>
