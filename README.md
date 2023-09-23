@@ -1,4 +1,4 @@
-![Doc7 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/63bdc542-1307-4089-b8fb-320585a03fdc)# Excel - Gantt Chart for Project Management
+# Excel - Gantt Chart for Project Management
 
 </br>
 
