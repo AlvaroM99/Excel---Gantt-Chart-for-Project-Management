@@ -716,13 +716,19 @@ Great let's do some example planning with the dependency engine for all the item
 (*) = IFNA(IF(OR(type="T", type="M"); MATCH(role; Settings!$I9$:$I16$; 0); -1); -1)
 ```
 
+![Doc7 11](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/31b9ce33-cbba-4a0b-a621-e5f6abad9ccc)
+
 <p align="justify"> Let's use this role id to replace the "tr_cc" placeholder in the color codes column with some meaningful computations. The first thing we do here is checking if the role id equals -1; this -1 can have multiple reasons either there is no item defined in the respective row, or there is an item that has no team member assigned or it is a stage item. For all these cases we want to apply the default coloring as fallback option because this ensures that even if there will be no team role-related coloring, the item is still visualized. In case we have an actual role id available then we build a three-digit color code just like we did for the project structure mode. The NUMBERVALUE function again helps us to transform a concatenated text string into a numeric value and within this function we concatenate the role id as the initial digit and then use the SWITCH statement to determine the last two digits based on the item type (*). As there's no need to visualize the hierarchical differences between a stage and its items, we don't need to use different shades of a color this time and thus, we simply use the strong shade version of each main color for both the tasks and the milestones. That means in case the type is a task we generate a color code ending in 01, these are the ending digits that we used for the stage items in the project structure mode, which means we can make use of the exact same conditional formatting rules for the indicator color and gantt chart visualization. For the milestones we have to introduce a new color code ending in 04. With the team roles color mode all color codes will end in either 01 or 04. So let's include the 04 ending into the conditional formatting rules that we already have in place. As we want to have a strong color shade here we're going to make this rule an OR statement that also considers 104, and for the gantt chart area we just include this color code into the rule that we have already set up for the milestones. </p>
 
 ```
 (*) "tr_cc" = IF(role_id=-1; color_code_default; NUMBERVALUE(role_id & SWITCH(type; "T"; "01"; "M"; "04")))
 ```
 
+![Doc7 12](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/9a3c031f-0e6f-438d-8f0a-1710ec32a109)
+
 <p align="justify"> What's left for both modes is to set up the conditional formatting rules for all the remaining three-digit color codes that go from 2 to 8 as their starting digit. Before we do that we are going to clean up the color code formula by putting the team roles calculation into a separate named calculation that we'll call "color_code_team_roles". For all the remaining three-digit color codes fortunately the process will be pretty straightforward. In the indicator column we are going to duplicate the color code checking rule seven times, we change the color code (_01 and _04 will have strong colors, while _02 and _03 will display shades of its stage color) and adjust the formatting to a new color. For each new pair of rules we gonna select a new main color from which we picked the strong and light shade versions. The only important thing you have to make sure here is that the color families used for these rules are consistent between the indicator column and the chart area. </p>
+
+![Doc7 14](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/50a11f7a-d46b-431a-8cba-1990dc2eab0f)
 
 </br>
 </br>
@@ -734,6 +740,8 @@ Great let's do some example planning with the dependency engine for all the item
 ```
 (*) "is_cc" = =IF(issue="⚠"; SWITCH(type; "S"; 901; "T"; 901; "M"; 902); color_code_default)
 ```
+
+![Doc7 14](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/53327cb7-612f-4aa9-9bde-bea9d369fb94)
 
 <p align="justify"> To create the conditional formatting rules for the color indicator column we only need one simple rule that we can use for both color codes so, in case the color code equals 901 or 902 we want to have a warning red fill. For the chart area we need to make the distinction between item types so we duplicate these two rules. The first one will be for the color code 901 and will simply fill the cell with the warning red, while the second rule is meant to be for the milestone symbols (color code 902) and will overwrite the warning sign with a red font style. Finally, we only need to take care of the main color code formula, first we transform the "is_cc" formula into a named calculation called "color_code_issues" and replace that expression. For now own we can hide the column "A" corresponding to the color code generation column we've just built. </p> 
 
