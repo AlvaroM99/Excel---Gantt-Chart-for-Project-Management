@@ -762,13 +762,19 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 
 <p align="justify"> Let's move on to the next amazing feature that will help you to take a snapshot of your actual plan, save it as the base plan, and then compare it to the changes that you make to your actual plan over time. The crucial idea of this feature is that once you have built up your schedule with all the dependencies, you can document the date of the recent changes you made. Then, jump over to the base plan section by unhiding its two columns (V and W) and just copy over the actual plan as plain values. Let's decrease the font size and change the font color to a dark gray. Once you have taken that snapshot, you should also document the date up in the section header so that you always know when the snapshot was taken. </p>
 
+![Doc8 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/ce125f3a-0ffa-4d1b-a33c-31dd1e764d62)
+
 <p align="justify"> Let's start by adding another drop-down menu that we call "Display" and that will have two list items to select from. The first option is simply called "Plan" and refers to only showing the actual plan, while the second item will be called "Plan vs. Base" which means we want to have both plans visualized in the chart area at the same time. Let's select "Plan" for now because that is the default option that is already in place here. </p>
+
+![Doc8 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/e7a34fa1-bcfa-4c64-9686-b5291952e510)
 
 <p align="justify"> Then we create a static name for these cells and call it simply "display". And of course, we're also going to add some dynamic name references for both the date columns of the base plan. So for the base start, as always, we're going to remove the dollar sign here. And of course, the base end. Based on this base start and base end, we now want to create a named calculation called "item_in_base" that does exactly the same for the base plan like the "item_in_plan" calculation already does for the actual plan calculation. To remind you, the "item_in_plan" calculation simply checks for every cell in the chart area if the date value in the timeline in the respective column is in between the "Plan start" and "Plan end" date and then returns either true or false. So let's copy the formula, create a new name, call it "item_in_base", set the scope to this worksheet, paste the formula, and now we simply overwrite this with "base_start and "base_end". </p>
 
 ```
 (*) "item_in_base" = AND(Gantt!date>=Gantt!base_start; Gantt!date<=Gantt!base_end)
 ```
+
+![Doc8 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/519ec021-5f7a-4477-8bd6-c988e10424c6)
 
 </br>
 </br>
@@ -781,11 +787,15 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 (*) = IF(type="M"; IF(item_in_plan; "◆"; IF(AND(display="Plan vs Base"; item_in_base); "◆"; "")); "")
 ```
 
+![Doc8 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/389e646a-36aa-4cc5-9078-e5bd36cb314a)
+
 <p align="justify"> Right at the moment, these milestone symbols of the base plan have the default dark blue font color, but we're going to change that into a font color that is less standing out. Let's open the conditional formatting manager and create a new rule that will only target these base plan milestone symbols. The formula for this rule has to test multiple conditions which are: display equals "Plan vs Base", "item_in_base" has to be true, and of course, in case the base and actual plan milestone are on the same date, we don't want this rule to be applied; and we just apply the actual plan coloring. That means we have to put the "item_in_plan" into a not statement to reverse it. And eventually, of course, type has to be "M" (*). For the formatting, I chose the super light gray, which is even lighter than the default coloring of the actual plan. </p>
 
 ```
 (*) = AND(display="Plan vs Base"; item_in_base; NOT(item_in_plan); type="M")
 ```
+
+![Doc8 5](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/c11f4729-1059-4b5a-8b92-43e16ad4c9f6)
 
 </br>
 </br>
@@ -802,6 +812,8 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 
 <p align="justify"> For the formatting, we change the font color back to automatic, go to the fill tab, and the reason why we can have both the base plan and the actual plan visualized in the same cell is that we're going to use pattern fills for the base plan. That means if a cell in the chart area is part of both the base plan and the actual plan, the pattern fill of the base plan will simply overlay the full cell fill of the actual plan. As the color for this pattern fill, I recommend using this dark gray because that allows us to use this not-so-heavy point pattern that says "25%" gray. Let's click OK, and there we have the beautiful but still subtle visualization of the base plan compared against the actual plan. </p>
 
+![Doc8 6](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/a3bfec83-f3b9-4a18-ad91-980b95097ff5)
+
 </br>
 </br>
 
@@ -813,11 +825,15 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 (*) timeline_base_start = project_base_start - WEEKDAY(project_base_start; 3)
 ```
 
+![Doc8 7](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7617695b-9d8a-4ae9-a6b2-956296666baa)
+
 <p align="justify"> Now that we have both the "timeline_plan_start" and the "timeline_base start defined, we can now make the initial timeline date dependent on the display mode. In case display equals "Plan vs Base," then we have to make sure that the timeline base start is greater than zero. If that is true, we're going to return the earlier of both the timeline base start and the "timeline_plan_start". That makes sure that no matter if the base plan is ahead or behind the actual plan, the timeline will always optimally adjust (*). In case we haven't taken a snapshot yet, which means the "timeline_base_start" is not greater than zero, the "timeline_plan_start" will be directly used even if the "Plan vs Base" mode is active. Furthermore, in case the selected display mode is not "Plan vs Base," then the "timeline_plan_start" will be used just like before. Once we hit enter, you can instantly see how the timeline perfectly adjusts to show the full base plan. </p>
 
 ```
 (*) = IF(display="Plan vs Base"; IF(timeline_base_start>0; MIN(timeline_base_start; timeline_plan_start); timeline_plan_start); timeline_plan_start)
-``` 
+```
+
+![Doc8 8](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/ed69ae82-c375-49fa-bad3-cecda2c52e5c)
 
 </br>
 </br>
