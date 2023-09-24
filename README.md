@@ -843,13 +843,17 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 
 ### 9.1. Progress tracking Engine
 
-<p align="justify"> Next, let's add an intuitive and partly automated way of tracking progress and visualizing it. For this, we have one column left at the end of the input section. We begin by changing the format of the numbers to percentages. That way, we can enter the percentage of completion for each item, and it automatically gets the percentage symbol assigned. Every percentage of completion that we have entered should then be reflected in the Gantt chart accordingly. To activate and deactivate the Progress visualization, let's add another drop-down menu with the label "Show Progress" and "Yes" or "No" as the selectable options. To easily access the selected value in other formulas, let's call this cell "show_progress". Of course, we also need this percentage completed value accessible as well, so we create a dynamic name reference called "percentage_complete."
+<p align="justify"> Next, let's add an intuitive and partly automated way of tracking progress and visualizing it. For this, we have one column left at the end of the input section. We begin by changing the format of the numbers to percentages. That way, we can enter the percentage of completion for each item, and it automatically gets the percentage symbol assigned. Every percentage of completion that we have entered should then be reflected in the Gantt chart accordingly. To activate and deactivate the Progress visualization, let's add another drop-down menu with the label "Show Progress" and "Yes" or "No" as the selectable options. To easily access the selected value in other formulas, let's call this cell "show_progress". Of course, we also need this percentage completed value accessible as well, so we create a dynamic name reference called "percentage_complete".
+  
+![Doc9 1](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/9949698d-8b16-4405-bab4-2af93439ef52)
 
 <p align="justify"> Taking this "percentage_complete" value, we then want to visualize the corresponding number of completed workdays in the chart area. To figure out whether each cell in the chart area is part of this completed time span or not, we need to set up a name calculation that is similar to the "item_in_plan" calculation. So let's copy that formula, create a new name called "item_in_complete", set the scope as usual, and paste the formula. Because we want the progress bar to start from the beginning of an item, we can leave the first condition that makes sure that the date in that column is greater equal to "plan_start". What we have to modify is the second condition because instead of just taking the "plan_end" as the upper limit, we want to dynamically compute the end of the completed time span starting from the planned start and then adding the equivalent number of completed workdays. The function that matches best our needs is the WORKDAY function, because it allows us to enter the "plan_start" and then add the number of completed workdays. To compute the number of completed workdays, we simply multiply the percentage complete and the number of required workdays, and since the "plan_start" is already one of the days in the time span, we have to subtract one from this product (*).
 
 ```
 (*) item_in_complete = AND(Gantt!date>=Gantt!plan_start; Gantt!date<=WORKDAY(plan_start; percentage_complete*wworkdays-1))
 ```
+
+![Doc9 2](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/7bf5949f-42b6-48d2-a7f0-cde321fc2a94)
 
 </br>
 </br>
@@ -861,6 +865,8 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 ```
 (*) = AND(show_progress="Yes"; item_in_complete; OR(type="S";type="T"))
 ```
+
+![Doc9 3](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/48941786-6187-40d1-b490-37cf61c2854f)
 
 </br>
 </br>
@@ -878,6 +884,8 @@ Final color code formula = @SWITCH(color_by; "Project Structure"; color_code_pro
 ```
 (*) = IF(type="M"; IF(item_in_plan; IF(AND(show_progress="Yes"; item_in_complete); "⚑"; "◆"); IF(AND(display="Plan vs Base"; item_in_base); "◆"; "")); "")
 ```
+
+![Doc9 4](https://github.com/AlvaroM99/Excel---Gantt-Chart-for-Project-Management/assets/129555669/9822abc5-2023-4acf-af57-dabcafb25d9c)
 
 </br>
 </br>
